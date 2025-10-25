@@ -1,0 +1,14 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: ReferenceGrant
+metadata:
+  name: allow-hubble-ui-cross-namespace
+  namespace: kube-system
+spec:
+  from:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: cilium
+  to:
+    - group: ""
+      kind: Service
+      name: hubble-ui
