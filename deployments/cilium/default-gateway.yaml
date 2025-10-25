@@ -12,6 +12,19 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: "*.192.168.100.243.sslip.io"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-sslip-tls
+            namespace: cilium
   addresses:
     - type: IPAddress
       value: 192.168.100.243
