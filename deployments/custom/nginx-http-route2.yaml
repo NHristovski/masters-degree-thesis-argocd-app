@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nginx-route-second
+spec:
+  parentRefs:
+    - name: default-cilium-gateway
+      sectionName: http
+      namespace: cilium
+  hostnames:
+    - "nginx-second.192.168.100.243.sslip.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+      backendRefs:
+        - name: nginx-test
+          port: 80
