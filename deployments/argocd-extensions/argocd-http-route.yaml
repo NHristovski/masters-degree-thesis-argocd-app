@@ -7,6 +7,7 @@ spec:
   parentRefs:
     - name: default-cilium-gateway
       sectionName: http
+      namespace: cilium
   hostnames:
     - "argocd.192.168.100.242.sslip.io"
   rules:
