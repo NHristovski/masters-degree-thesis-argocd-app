@@ -1,0 +1,11 @@
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: l2policy
+spec:
+  loadBalancerIPs: true
+  interfaces:
+    - enp0s1
+  nodeSelector:
+      matchExpressions:
+        - { key: kubernetes.io/hostname, operator: In, values: [ ubuntu01, ubuntu02, ubuntu03, ubuntu04, ubuntu05 ] }
