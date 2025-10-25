@@ -9,7 +9,7 @@ spec:
       sectionName: http
       namespace: cilium
   hostnames:
-    - "argocd.192.168.100.242.sslip.io"
+    - "argocd.192.168.100.243.sslip.io"
   rules:
     - matches:
         - path:
