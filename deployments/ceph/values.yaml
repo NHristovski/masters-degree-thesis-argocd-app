@@ -4,3 +4,11 @@ ceph-csi-rbd:
       monitors:
         - "192.168.100.226:6789"
 
+  nodeplugin:
+    tolerations:
+      - operator: Exists
+
+  provisioner:
+    tolerations:
+      - operator: Exists
+
