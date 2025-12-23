@@ -6,9 +6,17 @@ ceph-csi-rbd:
 
   nodeplugin:
     tolerations:
-      - operator: Exists
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+      - key: node.kubernetes.io/disk-pressure
+        operator: Exists
+        effect: NoSchedule
 
   provisioner:
     tolerations:
-      - operator: Exists
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+      - key: node.kubernetes.io/disk-pressure
+        operator: Exists
+        effect: NoSchedule
 
