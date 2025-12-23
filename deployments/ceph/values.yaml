@@ -8,15 +8,9 @@ ceph-csi-rbd:
     tolerations:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
-      - key: node.kubernetes.io/disk-pressure
-        operator: Exists
-        effect: NoSchedule
 
   provisioner:
     tolerations:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
-      - key: node.kubernetes.io/disk-pressure
-        operator: Exists
-        effect: NoSchedule
 
