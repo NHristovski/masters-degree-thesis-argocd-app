@@ -1,0 +1,6 @@
+ceph-csi-rbd:
+  csiConfig:
+    - clusterID: "280ba296-4f3c-4086-94a7-a3f9d46e4a24"
+      monitors:
+        - "192.168.100.226:6789"
+
