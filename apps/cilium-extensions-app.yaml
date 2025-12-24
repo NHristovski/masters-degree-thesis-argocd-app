@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cilium
+  name: cilium-extensions
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -12,7 +12,7 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-      path: deployments/cilium
+      path: deployments/cilium-extensions
       targetRevision: main
   syncPolicy:
     syncOptions:
