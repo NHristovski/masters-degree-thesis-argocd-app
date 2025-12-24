@@ -1,4 +1,6 @@
 ceph-csi-rbd:
+  logLevel: 5
+  sidecarLogLevel: 5
   csiConfig:
     - clusterID: "280ba296-4f3c-4086-94a7-a3f9d46e4a24"
       monitors:
@@ -10,9 +12,6 @@ ceph-csi-rbd:
         operator: Exists
 
   provisioner:
-    provisioner:
-      args:
-        - "-v 5"
     replicaCount: 2
     tolerations:
       - key: node-role.kubernetes.io/control-plane
