@@ -10,6 +10,8 @@ ceph-csi-rbd:
         operator: Exists
 
   provisioner:
+    provisioner:
+      extraArgs: -v 5
     replicaCount: 2
     tolerations:
       - key: node-role.kubernetes.io/control-plane
