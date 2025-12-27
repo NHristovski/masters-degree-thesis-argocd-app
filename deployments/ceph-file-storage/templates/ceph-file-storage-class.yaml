@@ -9,6 +9,7 @@ parameters:
   clusterID: 280ba296-4f3c-4086-94a7-a3f9d46e4a24
   fsName: cephfs
   pool: KubeFS_data
+  mounter: fuse
   csi.storage.k8s.io/provisioner-secret-name: ceph-file-storage-auth
   csi.storage.k8s.io/provisioner-secret-namespace: ceph-file-storage
   csi.storage.k8s.io/controller-expand-secret-name: ceph-file-storage-auth
