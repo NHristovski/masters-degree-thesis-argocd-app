@@ -2,5 +2,8 @@ dependencies:
 - name: ceph-csi-rbd
   repository: https://ceph.github.io/csi-charts
   version: 3.15.1
-digest: sha256:298cae23124f95c378ef618a3fa2b0f2ae726a1a3e5c86addbe4078d3e362829
-generated: "2025-12-23T21:41:30.422349+01:00"
+- name: ceph-csi-cephfs
+  repository: https://ceph.github.io/csi-charts
+  version: 3.15.1
+digest: sha256:34f2eec524b6ef573589e75141807984f91f7ad9f7a48a0fd31e3f78eaebba30
+generated: "2025-12-27T17:49:12.628029+01:00"
