@@ -1,19 +1,19 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: ceph-file-storage
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: ceph-file-storage
-    server: https://kubernetes.default.svc
-  project: default
-  sources:
-    - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-      path: deployments/ceph-file-storage
-      targetRevision: main
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+#apiVersion: argoproj.io/v1alpha1
+#kind: Application
+#metadata:
+#  name: ceph-file-storage
+#  namespace: argocd
+#  finalizers:
+#    - resources-finalizer.argocd.argoproj.io
+#spec:
+#  destination:
+#    namespace: ceph-file-storage
+#    server: https://kubernetes.default.svc
+#  project: default
+#  sources:
+#    - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
+#      path: deployments/ceph-file-storage
+#      targetRevision: main
+#  syncPolicy:
+#    syncOptions:
+#      - CreateNamespace=true
