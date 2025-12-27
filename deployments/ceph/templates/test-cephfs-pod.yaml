@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+    - name: app-container
+      image: busybox
+      command: ["sleep", "infinity"]
+      volumeMounts:
+        - mountPath: "/mnt/cephfs"
+          name: volume
+  volumes:
+    - name: volume
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
