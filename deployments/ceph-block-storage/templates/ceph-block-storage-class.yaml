@@ -10,11 +10,11 @@ parameters:
   pool: kubernetes
   imageFeatures: layering
   csi.storage.k8s.io/provisioner-secret-name: ceph-block-storage-auth
-  csi.storage.k8s.io/provisioner-secret-namespace: ceph
+  csi.storage.k8s.io/provisioner-secret-namespace: ceph-block-storage
   csi.storage.k8s.io/controller-expand-secret-name: ceph-block-storage-auth
-  csi.storage.k8s.io/controller-expand-secret-namespace: ceph
+  csi.storage.k8s.io/controller-expand-secret-namespace: ceph-block-storage
   csi.storage.k8s.io/node-stage-secret-name: ceph-block-storage-auth
-  csi.storage.k8s.io/node-stage-secret-namespace: ceph
+  csi.storage.k8s.io/node-stage-secret-namespace: ceph-block-storage
 reclaimPolicy: Delete
 allowVolumeExpansion: true
 mountOptions:

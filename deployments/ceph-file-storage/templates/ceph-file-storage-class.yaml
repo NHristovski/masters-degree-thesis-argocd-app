@@ -10,11 +10,11 @@ parameters:
   fsName: cephfs
   pool: KubeFS_data
   csi.storage.k8s.io/provisioner-secret-name: ceph-file-storage-auth
-  csi.storage.k8s.io/provisioner-secret-namespace: ceph
+  csi.storage.k8s.io/provisioner-secret-namespace: ceph-file-storage
   csi.storage.k8s.io/controller-expand-secret-name: ceph-file-storage-auth
-  csi.storage.k8s.io/controller-expand-secret-namespace: ceph
+  csi.storage.k8s.io/controller-expand-secret-namespace: ceph-file-storage
   csi.storage.k8s.io/node-stage-secret-name: ceph-file-storage-auth
-  csi.storage.k8s.io/node-stage-secret-namespace: ceph
+  csi.storage.k8s.io/node-stage-secret-namespace: ceph-file-storage
 reclaimPolicy: Delete
 allowVolumeExpansion: true
 mountOptions:

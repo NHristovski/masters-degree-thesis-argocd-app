@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ceph
+  name: ceph-block-storage
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: ceph
+    namespace: ceph-block-storage
     server: https://kubernetes.default.svc
   project: default
   sources:
     - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-      path: deployments/ceph
+      path: deployments/ceph-block-storage
       targetRevision: main
   syncPolicy:
     syncOptions:

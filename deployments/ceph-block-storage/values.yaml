@@ -10,14 +10,7 @@ ceph-csi-rbd:
         operator: Exists
 
   provisioner:
-    replicaCount: 2
+    replicaCount: 1
     tolerations:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
-
-ceph-csi-cephfs:
-  csiConfig:
-    - clusterID: "280ba296-4f3c-4086-94a7-a3f9d46e4a24"
-      monitors:
-        - "192.168.100.226:6789"
-
