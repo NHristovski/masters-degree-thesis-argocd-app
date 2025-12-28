@@ -1,0 +1,9 @@
+dependencies:
+- name: alloy
+  repository: https://grafana.github.io/helm-charts
+  version: 1.5.0
+- name: alloy
+  repository: https://grafana.github.io/helm-charts
+  version: 1.5.0
+digest: sha256:284dd5d12f463d08c660fb848d934d611d01d63575926def57f98c98acd49ca6
+generated: "2025-12-28T01:19:26.82378+01:00"
