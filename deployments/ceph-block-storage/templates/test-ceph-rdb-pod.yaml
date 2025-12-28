@@ -1,16 +1,16 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: app-pod
-spec:
-  containers:
-    - name: app-container
-      image: busybox
-      command: ["sleep", "infinity"]
-      volumeMounts:
-        - mountPath: "/mnt/cephrdb"
-          name: volume
-  volumes:
-    - name: volume
-      persistentVolumeClaim:
-        claimName: ceph-rdb-pvc
+{{/*apiVersion: v1*/}}
+{{/*kind: Pod*/}}
+{{/*metadata:*/}}
+{{/*  name: app-pod*/}}
+{{/*spec:*/}}
+{{/*  containers:*/}}
+{{/*    - name: app-container*/}}
+{{/*      image: busybox*/}}
+{{/*      command: ["sleep", "infinity"]*/}}
+{{/*      volumeMounts:*/}}
+{{/*        - mountPath: "/mnt/cephrdb"*/}}
+{{/*          name: volume*/}}
+{{/*  volumes:*/}}
+{{/*    - name: volume*/}}
+{{/*      persistentVolumeClaim:*/}}
+{{/*        claimName: ceph-rdb-pvc*/}}
