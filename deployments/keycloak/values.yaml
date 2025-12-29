@@ -21,9 +21,9 @@ keycloak:
     host: postgres.keycloak.svc.cluster.local
     database: keycloak
     port: 5432
-    existingSecret: "postgres-keycloak-secret"
-    existingSecretUserKey: "postgresUsername"
-    existingSecretPasswordKey: "postgresPassword"
+    existingSecret: keycloak-secrets
+    existingSecretUserKey: postgresUsername
+    existingSecretPasswordKey: postgresPassword
   postgresql:
     enabled: false
   extraEnvVars:
