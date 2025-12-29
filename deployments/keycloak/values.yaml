@@ -2,6 +2,9 @@ secrets:
   sealed: false
 
 keycloak:
+  global:
+    security:
+      allowInsecureImages: true
   image:
     repository: keycloak/keycloak
     tag: 26.4.7
