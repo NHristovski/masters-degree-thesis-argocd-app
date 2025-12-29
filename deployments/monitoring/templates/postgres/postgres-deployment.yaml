@@ -40,7 +40,7 @@ spec:
 
           envFrom:
             - secretRef:
-                name: grafana-postgres-secret
+                name: grafana-secrets
 
           resources:
             requests:

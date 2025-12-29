@@ -1,12 +1,7 @@
-postgres:
-  secrets:
-    sealed: false
+secrets:
+  sealed: false
 
 grafana:
-  oidc:
-    secrets:
-      sealed: false
-
   securityContext:
     runAsNonRoot: true
     runAsUser: 472
@@ -22,7 +17,7 @@ grafana:
       type: RuntimeDefault
     readOnlyRootFilesystem: true
 
-  envFromSecret: grafana-oidc-client-secret
+  envFromSecret: grafana-secrets
 
   env:
     GF_SECURITY_ALLOW_EMBEDDING: true
@@ -71,9 +66,9 @@ grafana:
     database:
       type: postgres
       host: grafana-postgres.monitoring.svc.cluster.local:5432
-      name: grafana
-      user: grafana
-      password: grafana
+      name: ${POSTGRES_DB}
+      user: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
       ssl_mode: disable
     server:
       domain: https://grafana.192.168.100.243.sslip.io/
