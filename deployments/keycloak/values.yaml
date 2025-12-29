@@ -30,3 +30,5 @@ keycloak:
       value: https://keycloak.192.168.100.243.sslip.io
     - name: KC_HOSTNAME_ADMIN_URL
       value: https://keycloak.192.168.100.243.sslip.io
+    - name: KC_PROXY_HEADERS
+      value: "X-FORWARDED"
