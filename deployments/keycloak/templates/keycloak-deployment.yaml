@@ -24,11 +24,13 @@ spec:
             - name: KC_HTTP_ENABLED
               value: "true"
             - name: KC_HOSTNAME
-              value: keycloak
+              value: keycloak.192.168.100.243.sslip.io
             - name: KC_HOSTNAME_STRICT
               value: "false"
-            - name: KC_PROXY
-              value: edge
+            - name: KC_PROXY_HEADERS
+              value: xforwarded
+            - name: KC_HTTP_RELATIVE_PATH
+              value: /
             - name: KC_HEALTH_ENABLED
               value: "true"
             - name: KC_METRICS_ENABLED
