@@ -17,6 +17,14 @@ grafana:
       type: RuntimeDefault
     readOnlyRootFilesystem: true
 
+  extraEmptyDirMounts:
+    - name: tmp
+      mountPath: /tmp
+    - name: plugins-temp
+      mountPath: /var/lib/grafana/plugins
+    - name: provisioning-temp
+      mountPath: /etc/grafana/provisioning/notifiers
+
   envFromSecret: grafana-secrets
 
   env:
