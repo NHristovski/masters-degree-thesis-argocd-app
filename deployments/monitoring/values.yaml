@@ -212,10 +212,6 @@ loki:
       storageClass: ceph-block-storage
       size: 5Gi
       existingClaim: loki-data-pvc
-    extraVolumeMounts:
-      - name: storage
-        mountPath: /var/loki
-        subPath: loki
   write:
     replicas: 0
   read:
