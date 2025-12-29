@@ -1,0 +1,153 @@
+postgres:
+  secrets:
+    sealed: false
+
+grafana:
+  oidc:
+    secrets:
+      sealed: false
+
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 472
+    runAsGroup: 472
+    fsGroup: 472
+
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
+    readOnlyRootFilesystem: true
+
+  envFromSecret: grafana-oidc-client-secret
+
+  env:
+    GF_SECURITY_ALLOW_EMBEDDING: true
+    GF_CORS_ENABLED: true
+    GF_CORS_ALLOW_CREDENTIALS: true
+    GF_CORS_ALLOWED_ORIGINS: "https://grafana.192.168.100.243.sslip.io/,http://grafana.monitoring.svc.cluster.local,https://grafana.monitoring.svc.cluster.local"
+    GF_CORS_ALLOWED_METHODS: "GET,POST,PUT,DELETE,OPTIONS"
+    GF_CORS_ALLOWED_HEADERS: "accept,authorization,content-type,origin"
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          url: http://prometheus-server.monitoring.svc.cluster.local
+          access: proxy
+          isDefault: true
+#        - name: loki-project001
+#          access: proxy
+#          type: loki
+#          url: http://nginx-loki-proxy.monitoring.svc.cluster.local:80
+#          basicAuth: true
+#          basicAuthUser: project001
+#          secureJsonData:
+#            basicAuthPassword: $__file{/etc/secrets/PROJECT001_PASSWORD}
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: "default"
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+  dashboards:
+    default:
+      kubernetes:
+        gnetId: 10000
+        revision: 1
+        datasource: Prometheus
+  grafana.ini:
+    database:
+      type: postgres
+      host: grafana-postgres.monitoring.svc.cluster.local:5432
+      name: grafana
+      user: grafana
+      password: grafana
+      ssl_mode: disable
+    server:
+      domain: https://grafana.192.168.100.243.sslip.io/
+      root_url: https://grafana.192.168.100.243.sslip.io/
+    auth.generic_oauth:
+      enabled: true
+      name: KEYCLOAK
+      allow_sign_up: true
+      client_id: grafana
+      client_secret: ${OAUTH_CLIENT_SECRET}
+      scopes: openid email profile offline_access roles
+      email_attribute_path: email
+      login_attribute_path: username
+      name_attribute_path: full_name
+      auth_url: https://keycloak.192.168.100.243.sslip.io/realms/grafana/protocol/openid-connect/auth
+      token_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/token
+      api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/userinfo
+      signout_redirect_url: https://keycloak.192.168.100.243.sslip.io/realms/grafana/protocol/openid-connect/logout
+      role_attribute_path: contains(realm_access.roles[*], 'GrafanaSuperadmin') && 'GrafanaAdmin' || contains(realm_access.roles[*], 'GrafanaAdmin') && 'Admin' || contains(realm_access.roles[*], 'GrafanaEditor') && 'Editor' || 'Viewer'
+      role_attribute_strict: true
+      allow_assign_grafana_admin: true
+    auth:
+      disable_login_form: true
+      oauth_auto_login: false
+      oauth_skip_org_role_update_sync: false
+      skip_org_role_sync: false
+    users:
+      auto_assign_org: true
+      auto_assign_org_role: Viewer
+      auto_assign_org_id: 1
+    security:
+      disable_initial_admin_creation: true
+      allow_embedding: true
+      cookie_secure: false
+  ingress:
+    enabled: false
+
+  route:
+    main:
+      enabled: true
+
+      hostnames:
+        - grafana.192.168.100.243.sslip.io
+
+      parentRefs:
+        - group: gateway.networking.k8s.io
+          kind: Gateway
+          name: default-cilium-gateway
+          namespace: cilium
+          sectionName: https
+
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+
+      ## httpsRedirect adds a filter for redirecting to https (HTTP 301 Moved Permanently).
+      ## To redirect HTTP traffic to HTTPS, you need to have a Gateway with both HTTP and HTTPS listeners.
+      ## Matches and filters do not take effect if enabled.
+      ## Ref. https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/
+      httpsRedirect: true
+#  extraSecretMounts:
+#    - name: loki-datasource-secret
+#      secretName: loki-datasource-secret
+#      mountPath: /etc/secrets
+#      readOnly: true
+#  extraConfigmapMounts:
+#    - name: istio-dashboard-configmap
+#      mountPath: /var/lib/grafana/dashboards/default/istio.json
+#      subPath: "istio.json"
+#      configMap: istio-dashboard
+#      readOnly: true
+#    - name: springboot-dashboard-configmap
+#      mountPath: /var/lib/grafana/dashboards/default/springboot.json
+#      subPath: "springboot.json"
+#      configMap: springboot-dashboard
+#      readOnly: true
