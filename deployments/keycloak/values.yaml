@@ -2,6 +2,10 @@ secrets:
   sealed: false
 
 keycloak:
+  image:
+    repository: keycloak/keycloak
+    tag: 26.4.7
+    digest: sha256:9409c59bdfb65dbffa20b11e6f18b8abb9281d480c7ca402f51ed3d5977e6007
   resources:
     requests:
       cpu: 500m
