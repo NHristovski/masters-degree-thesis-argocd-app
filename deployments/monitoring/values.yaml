@@ -276,8 +276,23 @@ alloy:
           enable_collectors       = ["cpu", "meminfo", "loadavg", "filesystem", "netdev", "diskstats"]
         }
 
+        discovery.relabel "node_name" {
+          targets = prometheus.exporter.unix.node.targets
+
+          rule {
+            source_labels = ["__address__"]
+            target_label  = "instance"
+            replacement   = env("HOSTNAME")
+          }
+
+          rule {
+            target_label = "job"
+            replacement  = "node-exporter"
+          }
+        }
+
         prometheus.scrape "unix_metrics" {
-          targets    = prometheus.exporter.unix.node.targets
+          targets    = discovery.relabel.node_name.output
           forward_to = [prometheus.remote_write.prometheus.receiver]
           scrape_interval = "15s"
         }
@@ -288,6 +303,11 @@ alloy:
             send_native_histograms = false
           }
         }
+    extraEnv:
+      - name: HOSTNAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
   controller:
     type: "daemonset"
 
