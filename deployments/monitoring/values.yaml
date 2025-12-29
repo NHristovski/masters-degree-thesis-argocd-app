@@ -252,6 +252,8 @@ prometheus:
       storageClass: ceph-block-storage
       size: 5Gi
       existingClaim: prometheus-data-pvc
+    extraFlags:
+      - web.enable-remote-write-receiver
 
   prometheus-pushgateway:
     enabled: false
