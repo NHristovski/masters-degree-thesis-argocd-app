@@ -261,3 +261,31 @@ prometheus:
     enabled: true
   alertmanager:
     enabled: false
+
+alloy:
+  alloy:
+    clustering:
+      enabled: false
+    configMap:
+      create: true
+      content: |
+        prometheus.exporter.unix "node" {
+          include_exporter_metrics = true
+          enable_collectors       = ["cpu", "meminfo", "loadavg", "filesystem", "netdev", "diskstats"]
+        }
+
+        prometheus.scrape "unix_metrics" {
+          targets    = prometheus.exporter.unix.node.targets
+          forward_to = [prometheus.remote_write.prometheus.receiver]
+          scrape_interval = "15s"
+        }
+
+        prometheus.remote_write "prometheus" {
+          endpoint {
+            url = "http://monitoring-prometheus-server.monitoring.svc.cluster.local/api/v1/write"
+            send_native_histograms = false
+          }
+        }
+  controller:
+    type: "daemonset"
+
