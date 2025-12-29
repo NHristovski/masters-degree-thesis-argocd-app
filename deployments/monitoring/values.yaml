@@ -164,6 +164,14 @@ grafana:
 #      readOnly: true
 
 loki:
+  memcached:
+    enabled: false
+  memcachedExporter:
+    enabled: false
+  chunksCache:
+    enabled: false
+  resultsCache:
+    enabled: false
   deploymentMode: SingleBinary
   gateway:
     enabled: false
