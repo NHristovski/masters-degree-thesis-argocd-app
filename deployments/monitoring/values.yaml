@@ -180,6 +180,10 @@ loki:
       filesystem:
         chunks_directory: "/var/loki/chunks"
         rules_directory: "/var/loki/rules"
+    chunk_store_config:
+      chunk_cache_config:
+        embedded_cache:
+          enabled: false
     limits_config:
       retention_period: 72h
       retention_stream:
