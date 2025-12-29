@@ -254,6 +254,7 @@ prometheus:
       existingClaim: prometheus-data-pvc
     extraFlags:
       - web.enable-remote-write-receiver
+      - web.enable-lifecycle
     retention: "2d"
 
   prometheus-pushgateway:
