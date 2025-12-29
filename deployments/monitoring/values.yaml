@@ -141,6 +141,10 @@ grafana:
         - path:
             type: PathPrefix
             value: /
+  persistence:
+    enabled: true
+    storageClass: ceph-block-storage
+    size: 2Gi
 
 #  extraSecretMounts:
 #    - name: loki-datasource-secret
@@ -158,3 +162,94 @@ grafana:
 #      subPath: "springboot.json"
 #      configMap: springboot-dashboard
 #      readOnly: true
+
+loki:
+  deploymentMode: SingleBinary
+  gateway:
+    enabled: false
+  test:
+    enabled: false
+  lokiCanary:
+    enabled: false
+  loki:
+    auth_enabled: true
+    commonConfig:
+      replication_factor: 1
+    storage:
+      type: "filesystem"
+      filesystem:
+        chunks_directory: "/var/loki/chunks"
+        rules_directory: "/var/loki/rules"
+    limits_config:
+      retention_period: 72h
+      retention_stream:
+        - selector: '{namespace=~".+"}'
+          priority: 1
+          period: 72h
+    compactor:
+      retention_enabled: true
+      retention_delete_delay: 2h
+      retention_delete_worker_count: 150
+      delete_request_store: filesystem
+    schemaConfig:
+      configs:
+        - from: 2024-04-01
+          object_store: filesystem
+          store: tsdb
+          schema: v13
+          index:
+            prefix: index_
+            period: 24h
+
+    rulerConfig:
+      storage:
+        type: local
+
+  singleBinary:
+    replicas: 1
+    persistence:
+      enabled: true
+      storageClass: ceph-block-storage
+      size: 5Gi
+      existingClaim: loki-data-pvc
+    extraVolumeMounts:
+      - name: storage
+        mountPath: /var/loki
+        subPath: loki
+  write:
+    replicas: 0
+  read:
+    replicas: 0
+  backend:
+    replicas: 0
+
+
+prometheus:
+  server:
+    securityContext:
+      runAsUser: 65534
+      runAsNonRoot: true
+      runAsGroup: 65534
+      fsGroup: 65534
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    persistentVolume:
+      enabled: true
+      storageClass: ceph-block-storage
+      size: 5Gi
+      existingClaim: prometheus-data-pvc
+
+  prometheus-pushgateway:
+    enabled: false
+  prometheus-node-exporter:
+    enabled: false
+  kube-state-metrics:
+    enabled: true
+  alertmanager:
+    enabled: false
