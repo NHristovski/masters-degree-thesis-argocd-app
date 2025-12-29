@@ -45,7 +45,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /health/live
-              port: 8080
+              port: 9000
             initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 5
@@ -54,7 +54,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /health/ready
-              port: 8080
+              port: 9000
             initialDelaySeconds: 40
             periodSeconds: 10
             timeoutSeconds: 5
