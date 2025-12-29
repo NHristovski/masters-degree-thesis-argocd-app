@@ -12,6 +12,10 @@ spec:
       labels:
         app: keycloak
     spec:
+      securityContext:
+        fsGroup: 1000
+        runAsNonRoot: true
+
       containers:
         - name: keycloak
           image: docker.io/keycloak/keycloak@sha256:9409c59bdfb65dbffa20b11e6f18b8abb9281d480c7ca402f51ed3d5977e6007
@@ -39,14 +43,30 @@ spec:
               value: postgres
             - name: KC_DB_URL
               value: jdbc:postgresql://postgres.keycloak.svc.cluster.local:5432/keycloak
+            - name: KC_TRANSACTION_XA_ENABLED
+              value: "false"
           envFrom:
             - secretRef:
                 name: keycloak-secret
+
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+
           livenessProbe:
             httpGet:
               path: /health/live
               port: 9000
-            initialDelaySeconds: 60
+            initialDelaySeconds: 180
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 5
@@ -55,7 +75,7 @@ spec:
             httpGet:
               path: /health/ready
               port: 9000
-            initialDelaySeconds: 40
+            initialDelaySeconds: 180
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
