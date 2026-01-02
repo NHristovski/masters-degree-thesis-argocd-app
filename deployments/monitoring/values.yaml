@@ -207,6 +207,7 @@ loki:
           priority: 1
           period: 72h
     compactor:
+      working_directory: /tmp/loki/compactor
       retention_enabled: true
       retention_delete_delay: 2h
       retention_delete_worker_count: 150
@@ -232,6 +233,16 @@ loki:
     extraEnvFrom:
       - secretRef:
           name: loki-s3-credentials
+    extraVolumes:
+      - name: tmp
+        emptyDir: {}
+      - name: loki-tmp
+        emptyDir: {}
+    extraVolumeMounts:
+      - name: tmp
+        mountPath: /tmp
+      - name: loki-tmp
+        mountPath: /var/loki
     persistence:
       enabled: false
   write:
