@@ -1,12 +1,15 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: loki-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ceph-block-storage
-  resources:
-    requests:
-      storage: 5Gi
+# PVC disabled - Loki now uses S3 storage backed by Ceph RGW
+# If you need to revert to filesystem storage, uncomment below:
+#
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: loki-data-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: ceph-block-storage
+#   resources:
+#     requests:
+#       storage: 5Gi
 

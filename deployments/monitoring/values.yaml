@@ -184,10 +184,18 @@ loki:
     commonConfig:
       replication_factor: 1
     storage:
-      type: "filesystem"
-      filesystem:
-        chunks_directory: "/var/loki/chunks"
-        rules_directory: "/var/loki/rules"
+      type: "s3"
+      bucketNames:
+        chunks: loki-chunks
+        ruler: loki-ruler
+        admin: loki-admin
+      s3:
+        endpoint: http://192.168.100.226:80
+        region: us-east-1
+        secretAccessKey: ${AWS_SECRET_ACCESS_KEY}
+        accessKeyId: ${AWS_ACCESS_KEY_ID}
+        s3ForcePathStyle: true
+        insecure: true
     chunk_store_config:
       chunk_cache_config:
         embedded_cache:
@@ -202,11 +210,11 @@ loki:
       retention_enabled: true
       retention_delete_delay: 2h
       retention_delete_worker_count: 150
-      delete_request_store: filesystem
+      delete_request_store: s3
     schemaConfig:
       configs:
         - from: 2024-04-01
-          object_store: filesystem
+          object_store: s3
           store: tsdb
           schema: v13
           index:
@@ -215,15 +223,17 @@ loki:
 
     rulerConfig:
       storage:
-        type: local
+        type: s3
+        s3:
+          bucketnames: loki-ruler
 
   singleBinary:
     replicas: 1
+    extraEnvFrom:
+      - secretRef:
+          name: loki-s3-credentials
     persistence:
-      enabled: true
-      storageClass: ceph-block-storage
-      size: 5Gi
-      existingClaim: loki-data-pvc
+      enabled: false
   write:
     replicas: 0
   read:
