@@ -234,14 +234,10 @@ loki:
       - secretRef:
           name: loki-s3-credentials
     extraVolumes:
-      - name: tmp
-        emptyDir: {}
-      - name: loki-tmp
+      - name: loki-work-dir
         emptyDir: {}
     extraVolumeMounts:
-      - name: tmp
-        mountPath: /tmp
-      - name: loki-tmp
+      - name: loki-work-dir
         mountPath: /var/loki
     persistence:
       enabled: false
