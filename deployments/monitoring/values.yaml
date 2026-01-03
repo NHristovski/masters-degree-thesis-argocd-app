@@ -291,6 +291,10 @@ alloy:
       create: false
       name: monitoring-alloy
       key: config.alloy
+    extraPorts:
+      - name: http-metrics
+        containerPort: 12345
+        protocol: TCP
     extraEnv:
       - name: HOSTNAME
         valueFrom:
@@ -304,19 +308,19 @@ alloy:
         valueFrom:
           fieldRef:
             fieldPath: metadata.name
-    extraVolumeMounts:
-      - name: alloy-logs
-        mountPath: /var/log/alloy
-      - name: varlog
-        mountPath: /var/log
-        readOnly: true
-    extraVolumes:
-      - name: alloy-logs
-        emptyDir: {}
-      - name: varlog
-        hostPath:
-          path: /var/log
-          type: Directory
+    mounts:
+      varlog: true
+      extra:
+        - name: alloy-logs
+          mountPath: /var/log/alloy
   controller:
     type: "daemonset"
+    volumes:
+      extra:
+        - name: alloy-logs
+          emptyDir: {}
+        - name: varlog
+          hostPath:
+            path: /var/log
+            type: Directory
 
