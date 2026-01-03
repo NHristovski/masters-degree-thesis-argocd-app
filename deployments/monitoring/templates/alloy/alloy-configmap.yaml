@@ -45,76 +45,108 @@ data:
       }
     }
 
-    // Scrape Alloy's own logs
-    loki.source.file "alloy_logs" {
-      targets = [
-        {
-          __path__ = "/var/log/alloy/*.log",
-          job      = "alloy",
-          instance = env("HOSTNAME"),
-          namespace = env("NAMESPACE"),
-          pod      = env("POD_NAME"),
-        },
-      ]
-      forward_to = [loki.process.alloy_logs.receiver]
+    // self parse job
+    discovery.kubernetes "self_parse" {
+      role = "pod"
+
+      namespaces {
+        names = ["{{ .Release.Namespace }}"]
+      }
+
+      selectors {
+        role = "pod"
+        label = "app.kubernetes.io/name=alloy"
+      }
     }
 
-    // Process and parse Alloy logs
-    loki.process "alloy_logs" {
-      stage.json {
-        expressions = {
-          level   = "level",
-          msg     = "msg",
-          ts      = "ts",
-        }
+    discovery.relabel "self_parse" {
+      targets = discovery.kubernetes.self_parse.targets
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label  = "instance"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        target_label  = "job"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+        separator     = "/"
+        target_label  = "__path__"
+        replacement   = "/var/log/pods/*$1/*.log"
+      }
+    }
+
+    local.file_match "self_parse" {
+      path_targets = discovery.relabel.self_parse.output
+      sync_period  = "15s"
+    }
+
+    loki.process "self_parse" {
+      forward_to = [loki.write.loki.receiver]
+
+      stage.tenant {
+        value = "platform"
+      }
+
+      stage.multiline {
+        firstline     = "ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})\\.\\d{0,10}Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"
+        max_lines     = 1024
+        max_wait_time = "5s"
+      }
+
+      stage.regex {
+        expression = "ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3})\\d+Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"
+      }
+
+      stage.timestamp {
+        source = "time"
+        format = "2006-01-02T15:04:05.000"
+      }
+
+      stage.template {
+        source   = "level"
+        template = "{{ "{{" }} ToUpper .Value }}"
+      }
+
+      stage.replace {
+        expression = "(.*)"
+        replace    = "level={{ "{{" }} .level }} {{ "{{" }} .content }}"
       }
 
       stage.labels {
         values = {
-          level = "",
+          level = null,
         }
       }
 
-      forward_to = [loki.write.loki.receiver]
-    }
-
-    // Scrape pod logs from Kubernetes
-    loki.source.kubernetes "pod_logs" {
-      targets    = discovery.kubernetes.pods.targets
-      forward_to = [loki.process.pod_logs.receiver]
-    }
-
-    // Discover Kubernetes pods
-    discovery.kubernetes "pods" {
-      role = "pod"
-
-      selectors {
-        role  = "pod"
-        field = "spec.nodeName=" + env("HOSTNAME")
+      stage.label_drop {
+        values = ["filename"]
       }
     }
 
-    // Process pod logs
-    loki.process "pod_logs" {
-      stage.static_labels {
-        values = {
-          cluster = "kubernetes",
-        }
-      }
+    loki.source.file "self_parse" {
+      targets    = local.file_match.self_parse.targets
+      forward_to = [loki.process.self_parse.receiver]
 
-      forward_to = [loki.write.loki.receiver]
+      file_watch {
+        min_poll_frequency = "500ms"
+        max_poll_frequency = "4s"
+      }
     }
 
     // Write logs to Loki
     loki.write "loki" {
       endpoint {
         url = "http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local:3100/loki/api/v1/push"
-        tenant_id = "platform"
-      }
-
-      external_labels = {
-        cluster = "kubernetes",
-        source  = "alloy",
+        batch_wait          = "15s"
+        batch_size          = "4MiB"
+        min_backoff_period  = "10s"
+        max_backoff_period  = "10m0s"
+        max_backoff_retries = 10
       }
     }
 
