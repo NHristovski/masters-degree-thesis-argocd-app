@@ -97,36 +97,36 @@ data:
         value = "platform"
       }
 
-{{/*      stage.multiline {*/}}
-{{/*        firstline     = "ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})\\.\\d{0,10}Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"*/}}
-{{/*        max_lines     = 1024*/}}
-{{/*        max_wait_time = "5s"*/}}
-{{/*      }*/}}
+      stage.multiline {
+        firstline     = "^(?s)(?P<default_time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z) (?P<stream>stdout|stderr) (?P<flags>\\S+?) ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})\\.\\d{0,10}Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"
+        max_lines     = 1024
+        max_wait_time = "5s"
+      }
 
-{{/*      stage.regex {*/}}
-{{/*        expression = "ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3})\\d+Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"*/}}
-{{/*      }*/}}
+      stage.regex {
+        expression = "^(?s)(?P<default_time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z) (?P<stream>stdout|stderr) (?P<flags>\\S+?) ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3})\\d+Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"
+      }
 
-{{/*      stage.timestamp {*/}}
-{{/*        source = "time"*/}}
-{{/*        format = "2006-01-02T15:04:05.000"*/}}
-{{/*      }*/}}
+      stage.timestamp {
+        source = "time"
+        format = "2006-01-02T15:04:05.000"
+      }
 
-{{/*      stage.template {*/}}
-{{/*        source   = "level"*/}}
-{{/*        template = "{{ "{{" }} ToUpper .Value }}"*/}}
-{{/*      }*/}}
+      stage.template {
+        source   = "level"
+        template = "{{ "{{" }} ToUpper .Value }}"
+      }
 
-{{/*      stage.replace {*/}}
-{{/*        expression = "(.*)"*/}}
-{{/*        replace    = "level={{ "{{" }} .level }} {{ "{{" }} .content }}"*/}}
-{{/*      }*/}}
+      stage.replace {
+        expression = "(.*)"
+        replace    = "level={{ "{{" }} .level }} {{ "{{" }} .content }}"
+      }
 
-{{/*      stage.labels {*/}}
-{{/*        values = {*/}}
-{{/*          level = null,*/}}
-{{/*        }*/}}
-{{/*      }*/}}
+      stage.labels {
+        values = {
+          level = null,
+        }
+      }
 
       stage.label_drop {
         values = ["filename"]
@@ -147,7 +147,6 @@ data:
     loki.write "loki" {
       endpoint {
         url = "http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local:3100/loki/api/v1/push"
-        tenant_id = "platform"
         batch_wait          = "15s"
         batch_size          = "4MiB"
         min_backoff_period  = "10s"
