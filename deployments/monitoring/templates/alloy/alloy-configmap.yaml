@@ -8,6 +8,11 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
 data:
   config.alloy: |
+
+    livedebugging {
+      enabled = true
+    }
+
     // Node exporter for system metrics
     prometheus.exporter.unix "node" {
       include_exporter_metrics = true
