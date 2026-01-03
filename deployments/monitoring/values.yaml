@@ -288,45 +288,30 @@ alloy:
     clustering:
       enabled: false
     configMap:
-      create: true
-      content: |
-        prometheus.exporter.unix "node" {
-          include_exporter_metrics = true
-          enable_collectors       = ["cpu", "meminfo", "loadavg", "filesystem", "netdev", "diskstats"]
-        }
-
-        discovery.relabel "node_name" {
-          targets = prometheus.exporter.unix.node.targets
-
-          rule {
-            source_labels = ["__address__"]
-            target_label  = "instance"
-            replacement   = env("HOSTNAME")
-          }
-
-          rule {
-            target_label = "job"
-            replacement  = "node-exporter"
-          }
-        }
-
-        prometheus.scrape "unix_metrics" {
-          targets    = discovery.relabel.node_name.output
-          forward_to = [prometheus.remote_write.prometheus.receiver]
-          scrape_interval = "15s"
-        }
-
-        prometheus.remote_write "prometheus" {
-          endpoint {
-            url = "http://monitoring-prometheus-server.monitoring.svc.cluster.local/api/v1/write"
-            send_native_histograms = false
-          }
-        }
+      create: false
+      name: monitoring-alloy
+      key: config.alloy
     extraEnv:
       - name: HOSTNAME
         valueFrom:
           fieldRef:
             fieldPath: spec.nodeName
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: LOKI_PASSWORD
+        value: "alloy-loki-password"
+    extraVolumeMounts:
+      - name: alloy-logs
+        mountPath: /var/log/alloy
+    extraVolumes:
+      - name: alloy-logs
+        emptyDir: {}
   controller:
     type: "daemonset"
 

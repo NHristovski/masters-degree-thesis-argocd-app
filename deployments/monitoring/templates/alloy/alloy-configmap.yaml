@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-alloy
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: {{ .Release.Name }}
+data:
+  config.alloy: |
+    // Node exporter for system metrics
+    prometheus.exporter.unix "node" {
+      include_exporter_metrics = true
+      enable_collectors       = ["cpu", "meminfo", "loadavg", "filesystem", "netdev", "diskstats"]
+    }
+
+    // Relabel node metrics with hostname
+    discovery.relabel "node_name" {
+      targets = prometheus.exporter.unix.node.targets
+
+      rule {
+        source_labels = ["__address__"]
+        target_label  = "instance"
+        replacement   = env("HOSTNAME")
+      }
+
+      rule {
+        target_label = "job"
+        replacement  = "node-exporter"
+      }
+    }
+
+    // Scrape node metrics and send to Prometheus
+    prometheus.scrape "unix_metrics" {
+      targets    = discovery.relabel.node_name.output
+      forward_to = [prometheus.remote_write.prometheus.receiver]
+      scrape_interval = "15s"
+    }
+
+    // Remote write to Prometheus
+    prometheus.remote_write "prometheus" {
+      endpoint {
+        url = "http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}.svc.cluster.local/api/v1/write"
+        send_native_histograms = false
+      }
+    }
+
+    // Scrape Alloy's own logs
+    loki.source.file "alloy_logs" {
+      targets = [
+        {
+          __path__ = "/var/log/alloy/*.log",
+          job      = "alloy",
+          instance = env("HOSTNAME"),
+          namespace = env("NAMESPACE"),
+          pod      = env("POD_NAME"),
+        },
+      ]
+      forward_to = [loki.process.alloy_logs.receiver]
+    }
+
+    // Process and parse Alloy logs
+    loki.process "alloy_logs" {
+      stage.json {
+        expressions = {
+          level   = "level",
+          msg     = "msg",
+          ts      = "ts",
+        }
+      }
+
+      stage.labels {
+        values = {
+          level = "",
+        }
+      }
+
+      forward_to = [loki.write.loki.receiver]
+    }
+
+    // Scrape pod logs from Kubernetes
+    loki.source.kubernetes "pod_logs" {
+      targets    = discovery.kubernetes.pods.targets
+      forward_to = [loki.process.pod_logs.receiver]
+    }
+
+    // Discover Kubernetes pods
+    discovery.kubernetes "pods" {
+      role = "pod"
+
+      selectors {
+        role  = "pod"
+        field = "spec.nodeName=" + env("HOSTNAME")
+      }
+    }
+
+    // Process pod logs
+    loki.process "pod_logs" {
+      stage.static_labels {
+        values = {
+          cluster = "kubernetes",
+        }
+      }
+
+      forward_to = [loki.write.loki.receiver]
+    }
+
+    // Write logs to Loki
+    loki.write "loki" {
+      endpoint {
+        url = "http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local:3100/loki/api/v1/push"
+
+        // Basic auth for Loki multi-tenancy
+        basic_auth {
+          username = "alloy"
+          password = env("LOKI_PASSWORD")
+        }
+      }
+
+      external_labels = {
+        cluster = "kubernetes",
+        source  = "alloy",
+      }
+    }
+
