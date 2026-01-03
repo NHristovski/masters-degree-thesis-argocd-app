@@ -304,8 +304,6 @@ alloy:
         valueFrom:
           fieldRef:
             fieldPath: metadata.name
-      - name: LOKI_PASSWORD
-        value: "alloy-loki-password"
     extraVolumeMounts:
       - name: alloy-logs
         mountPath: /var/log/alloy

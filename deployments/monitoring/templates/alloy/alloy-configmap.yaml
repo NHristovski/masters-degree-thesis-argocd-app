@@ -109,12 +109,7 @@ data:
     loki.write "loki" {
       endpoint {
         url = "http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local:3100/loki/api/v1/push"
-
-        // Basic auth for Loki multi-tenancy
-        basic_auth {
-          username = "alloy"
-          password = env("LOKI_PASSWORD")
-        }
+        tenant_id = "platform"
       }
 
       external_labels = {
