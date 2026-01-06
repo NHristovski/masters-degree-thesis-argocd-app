@@ -12,7 +12,7 @@ spec:
     namespace: keycloak
   sources:
     - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-      path: deployments/keycloak
+      path: platform-charts/keycloak
       targetRevision: main
   syncPolicy:
     syncOptions:

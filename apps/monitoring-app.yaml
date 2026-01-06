@@ -6,13 +6,13 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
   sources:
     - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-      path: deployments/monitoring
+      path: platform-charts/monitoring
       targetRevision: main
   syncPolicy:
     syncOptions:

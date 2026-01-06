@@ -6,11 +6,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
   sources:
     - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-      path: deployments/argocd-extensions
+      path: platform-charts/argocd-extensions
       targetRevision: main

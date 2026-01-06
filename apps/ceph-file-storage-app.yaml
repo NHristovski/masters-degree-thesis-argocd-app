@@ -6,13 +6,13 @@
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 #spec:
+#  project: default
 #  destination:
 #    namespace: ceph-file-storage
 #    server: https://kubernetes.default.svc
-#  project: default
 #  sources:
 #    - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
-#      path: deployments/ceph-file-storage
+#      path: platform-charts/ceph-file-storage
 #      targetRevision: main
 #  syncPolicy:
 #    syncOptions:
