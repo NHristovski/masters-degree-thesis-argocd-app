@@ -1,0 +1,9 @@
+apiVersion: v2
+name: username-test2
+description: username-test2 Helm chart for Kubernetes
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0.0"
