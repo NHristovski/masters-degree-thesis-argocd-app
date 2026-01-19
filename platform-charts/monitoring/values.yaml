@@ -2,6 +2,9 @@ secrets:
   sealed: false
 
 grafana:
+
+  adminPassword: NOT_USED
+
   securityContext:
     runAsNonRoot: true
     runAsUser: 472
@@ -118,6 +121,7 @@ grafana:
       auto_assign_org_id: 1
     security:
       disable_initial_admin_creation: true
+      disable_initial_admin_password_change: true
       allow_embedding: true
       cookie_secure: false
   ingress:
