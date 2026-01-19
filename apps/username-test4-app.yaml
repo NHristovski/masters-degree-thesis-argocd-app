@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: username-test4
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: test4ns
+    server: https://kubernetes.default.svc
+  sources:
+    - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
+      path: platform-charts/username-test4
+      targetRevision: main
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
