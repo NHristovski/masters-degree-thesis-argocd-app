@@ -150,23 +150,6 @@ grafana:
     storageClassName: ceph-block-storage
     size: 2Gi
 
-#  extraSecretMounts:
-#    - name: loki-datasource-secret
-#      secretName: loki-datasource-secret
-#      mountPath: /etc/secrets
-#      readOnly: true
-#  extraConfigmapMounts:
-#    - name: istio-dashboard-configmap
-#      mountPath: /var/lib/grafana/dashboards/default/istio.json
-#      subPath: "istio.json"
-#      configMap: istio-dashboard
-#      readOnly: true
-#    - name: springboot-dashboard-configmap
-#      mountPath: /var/lib/grafana/dashboards/default/springboot.json
-#      subPath: "springboot.json"
-#      configMap: springboot-dashboard
-#      readOnly: true
-
 loki:
   memcached:
     enabled: false
