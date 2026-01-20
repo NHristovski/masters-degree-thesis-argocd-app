@@ -16,9 +16,12 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           env:
+            - name: TEST2
+              value: "test2"
             - name: TEST1
               value: "one"
           ports:
             - containerPort: 80
+
 
 
