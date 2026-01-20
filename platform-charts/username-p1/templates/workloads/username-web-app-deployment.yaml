@@ -18,8 +18,6 @@ spec:
           env:
             - name: DBB
               value: "222"
-            - name: DB_HOST
-              value: "test"
           volumeMounts:
             - name: s1
               mountPath: /data
@@ -36,5 +34,6 @@ spec:
         - name: s1
           persistentVolumeClaim:
             claimName: username-s1
+
 
 
