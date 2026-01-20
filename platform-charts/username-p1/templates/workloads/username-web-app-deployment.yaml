@@ -16,14 +16,20 @@ spec:
         - name: image
           image: docker.io/ngin:1.27-alpine
           volumeMounts:
+            - name: s2
+              mountPath: /data2
             - name: s1
               mountPath: /data
           ports:
             - containerPort: 80
       volumes:
+        - name: s2
+          persistentVolumeClaim:
+            claimName: username-s2
         - name: s1
           persistentVolumeClaim:
             claimName: username-s1
+
 
 
 
