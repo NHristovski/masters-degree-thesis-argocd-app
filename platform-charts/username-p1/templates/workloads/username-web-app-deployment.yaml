@@ -18,15 +18,11 @@ spec:
           volumeMounts:
             - name: s2
               mountPath: /var
-            - name: s1
-              mountPath: /data
           ports:
             - containerPort: 80
       volumes:
         - name: s2
           persistentVolumeClaim:
             claimName: username-s2
-        - name: s1
-          persistentVolumeClaim:
-            claimName: username-s1
+
 
