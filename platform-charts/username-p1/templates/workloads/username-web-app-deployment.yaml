@@ -15,6 +15,9 @@ spec:
       containers:
         - name: image
           image: docker.io/ngin:1.27-alpine
+          env:
+            - name: DB_HOST
+              value: "test"
           volumeMounts:
             - name: s1
               mountPath: /data
@@ -31,3 +34,4 @@ spec:
         - name: s1
           persistentVolumeClaim:
             claimName: username-s1
+
