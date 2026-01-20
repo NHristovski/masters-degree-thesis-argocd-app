@@ -15,5 +15,12 @@ spec:
       containers:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
+          volumeMounts:
+            - name: s1
+              mountPath: /data
           ports:
             - containerPort: 80
+      volumes:
+        - name: s1
+          persistentVolumeClaim:
+            claimName: username-s1
