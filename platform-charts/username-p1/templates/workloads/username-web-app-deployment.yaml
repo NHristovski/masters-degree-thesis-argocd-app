@@ -15,9 +15,6 @@ spec:
       containers:
         - name: image
           image: docker.io/ngin:1.27-alpine
-          env:
-            - name: DBB
-              value: "222"
           volumeMounts:
             - name: s1
               mountPath: /data
@@ -34,6 +31,7 @@ spec:
         - name: s1
           persistentVolumeClaim:
             claimName: username-s1
+
 
 
 
