@@ -18,8 +18,6 @@ spec:
           volumeMounts:
             - name: s2
               mountPath: /data2
-            - name: s1
-              mountPath: /data1
           env:
             - name: TEST2
               value: "test2"
@@ -35,7 +33,5 @@ spec:
         - name: s2
           persistentVolumeClaim:
             claimName: s2
-        - name: s1
-          persistentVolumeClaim:
-            claimName: s1
+
 
