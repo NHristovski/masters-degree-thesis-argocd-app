@@ -16,6 +16,8 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           volumeMounts:
+            - name: s2
+              mountPath: /data2
             - name: s1
               mountPath: /data1
           env:
@@ -30,6 +32,10 @@ spec:
 
 
       volumes:
+        - name: s2
+          persistentVolumeClaim:
+            claimName: s2
         - name: s1
           persistentVolumeClaim:
             claimName: s1
+
