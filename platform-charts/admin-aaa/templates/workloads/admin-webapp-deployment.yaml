@@ -17,9 +17,3 @@ spec:
           image: docker.io/nginx:1.27-alpine
           ports:
             - containerPort: 80
-          env:
-            - name: A
-              valueFrom:
-                secretKeyRef:
-                  name: A
-                  key: A
