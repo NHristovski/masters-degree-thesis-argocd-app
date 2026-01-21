@@ -22,8 +22,3 @@ spec:
               value: "C"
             - name: B
               value: "bbbb"
-            - name: A
-              valueFrom:
-                secretKeyRef:
-                  name: A
-                  key: A
