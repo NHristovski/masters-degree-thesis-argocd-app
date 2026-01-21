@@ -16,8 +16,6 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           volumeMounts:
-            - name: data
-              mountPath: /mata
           env:
             - name: DB_PASSWORD
               valueFrom:
@@ -48,9 +46,7 @@ spec:
 
 
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
+
 
 
 
