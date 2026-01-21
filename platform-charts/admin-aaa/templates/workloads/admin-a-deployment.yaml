@@ -22,4 +22,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: A
-                  key: A
+                  key: A          volumeMounts:            - name: b              mountPath: /data      volumes:
+        - name: b
+          persistentVolumeClaim:
+            claimName: b
