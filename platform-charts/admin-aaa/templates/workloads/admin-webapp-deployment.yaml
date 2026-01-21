@@ -16,11 +16,16 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           volumeMounts:
+            - name: data2
+              mountPath: data2
             - name: data
               mountPath: /data
           ports:
             - containerPort: 80
       volumes:
+        - name: data2
+          persistentVolumeClaim:
+            claimName: data2
         - name: data
           persistentVolumeClaim:
             claimName: data
