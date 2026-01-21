@@ -15,6 +15,9 @@ spec:
       containers:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
+          volumeMounts:
+            - name: dv
+              mountPath: /data
           env:
             - name: A
               value: "B"
@@ -36,3 +39,8 @@ spec:
 
 
 
+
+      volumes:
+        - name: dv
+          persistentVolumeClaim:
+            claimName: dv
