@@ -25,5 +25,3 @@ spec:
                   key: A
             - name: BBB
               value: "B"
-            - name: AAA
-              value: "A"
