@@ -16,6 +16,8 @@ spec:
         - name: a
           image: docker.io/a:a
           env:
+            - name: B
+              value: "B"
             - name: AAA
               valueFrom:
                 secretKeyRef:
