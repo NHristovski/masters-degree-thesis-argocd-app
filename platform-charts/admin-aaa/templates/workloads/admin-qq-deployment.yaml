@@ -20,9 +20,4 @@ spec:
           env:
             - name: BB
               value: "BB"
-            - name: AAA
-              valueFrom:
-                secretKeyRef:
-                  name: A
-                  key: A
 
