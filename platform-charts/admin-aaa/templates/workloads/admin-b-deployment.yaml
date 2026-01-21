@@ -15,5 +15,12 @@ spec:
       containers:
         - name: b
           image: b/b:b
+          volumeMounts:
+            - name: a
+              mountPath: data
           ports:
             - containerPort: 80
+      volumes:
+        - name: a
+          persistentVolumeClaim:
+            claimName: a
