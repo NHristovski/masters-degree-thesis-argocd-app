@@ -18,8 +18,7 @@ spec:
           env:
             - name: CCCC
               value: "aaaa"
-            - name: AAAA
-              value: "aaa"
+
 
 
 
