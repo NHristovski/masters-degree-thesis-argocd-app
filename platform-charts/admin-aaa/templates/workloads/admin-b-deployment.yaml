@@ -16,5 +16,7 @@ spec:
         - name: b
           image: b/b:b
           env:
+            - name: D
+              value: "D"
             - name: C
               value: "C"
