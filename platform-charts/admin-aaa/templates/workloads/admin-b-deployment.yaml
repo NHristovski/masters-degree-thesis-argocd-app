@@ -15,12 +15,6 @@ spec:
       containers:
         - name: b
           image: b/b:b
-          env:
-            - name: AAAA
-              valueFrom:
-                secretKeyRef:
-                  name: A
-                  key: A
             - name: D
               value: "D"
             - name: C
