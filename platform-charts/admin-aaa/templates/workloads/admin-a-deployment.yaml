@@ -17,3 +17,6 @@ spec:
           image: docker.io/a:a
           ports:
             - containerPort: 80
+          env:
+            - name: AA
+              value: "aaaa"
