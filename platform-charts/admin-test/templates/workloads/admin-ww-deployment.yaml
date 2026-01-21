@@ -15,11 +15,3 @@ spec:
       containers:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
-          env:
-            - name: CCCC
-              value: "aaaa"
-
-
-
-
-
