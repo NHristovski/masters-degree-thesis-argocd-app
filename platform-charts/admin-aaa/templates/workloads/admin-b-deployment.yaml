@@ -18,6 +18,8 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
+            - name: b
+              mountPath: aa
             - name: second
               mountPath: /data
           env:
@@ -29,6 +31,9 @@ spec:
                   name: A
                   key: A
       volumes:
+        - name: b
+          persistentVolumeClaim:
+            claimName: b
         - name: second
           persistentVolumeClaim:
             claimName: second
