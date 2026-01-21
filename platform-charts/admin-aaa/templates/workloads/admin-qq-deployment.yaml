@@ -17,3 +17,11 @@ spec:
           image: docker.io/qq:qq
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: b
+              mountPath: /data
+
+      volumes:
+        - name: b
+          persistentVolumeClaim:
+            claimName: b
