@@ -15,3 +15,9 @@ spec:
       containers:
         - name: a
           image: docker.io/a:a
+          env:
+            - name: AAA
+              valueFrom:
+                secretKeyRef:
+                  name: A
+                  key: A
