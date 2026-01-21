@@ -15,6 +15,9 @@ spec:
       containers:
         - name: b
           image: b/b:b
+          env:
+            - name: BB
+              value: "N"
           volumeMounts:
             - name: a
               mountPath: data
