@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qq
+  template:
+    metadata:
+      labels:
+        app: qq
+    spec:
+      containers:
+        - name: qq
+          image: docker.io/qq:qq
+          ports:
+            - containerPort: 80
