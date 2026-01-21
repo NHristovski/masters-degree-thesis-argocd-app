@@ -17,7 +17,3 @@ spec:
           image: docker.io/qq:qq
           ports:
             - containerPort: 80
-          env:
-            - name: BB
-              value: "BB"
-
