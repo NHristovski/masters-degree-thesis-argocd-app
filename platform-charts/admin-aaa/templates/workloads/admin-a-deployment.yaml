@@ -18,13 +18,5 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: BB
-              valueFrom:
-                secretKeyRef:
-                  name: b
-                  key: b
             - name: AA
               valueFrom:
-                secretKeyRef:
-                  name: a
-                  key: a
