@@ -18,5 +18,7 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: BBB
+              value: "B"
             - name: AAA
               value: "A"
