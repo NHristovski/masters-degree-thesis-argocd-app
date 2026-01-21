@@ -17,3 +17,9 @@ spec:
           image: a/a:a
           ports:
             - containerPort: 80
+          env:
+            - name: AA
+              valueFrom:
+                secretKeyRef:
+                  name: a
+                  key: a
