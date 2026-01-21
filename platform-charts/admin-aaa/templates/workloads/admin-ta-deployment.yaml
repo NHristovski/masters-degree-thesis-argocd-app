@@ -18,6 +18,12 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: AAQ
+              valueFrom:
+                secretKeyRef:
+                  name: db-creds
+                  key: password
+          env:
             - name: AAA
               value: "AA"
           env:
