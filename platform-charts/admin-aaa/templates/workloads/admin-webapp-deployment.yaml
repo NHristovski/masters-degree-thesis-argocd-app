@@ -18,14 +18,9 @@ spec:
           volumeMounts:
             - name: data2
               mountPath: data2
-            - name: data
-              mountPath: /data
           ports:
             - containerPort: 80
       volumes:
         - name: data2
           persistentVolumeClaim:
             claimName: data2
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
