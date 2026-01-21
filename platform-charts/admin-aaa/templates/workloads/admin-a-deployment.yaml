@@ -21,6 +21,8 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: B
+              value: "B"
             - name: A
               valueFrom:
                 secretKeyRef:
