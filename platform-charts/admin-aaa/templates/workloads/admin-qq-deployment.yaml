@@ -23,5 +23,3 @@ spec:
                 secretKeyRef:
                   name: A
                   key: A
-            - name: BBB
-              value: "B"
