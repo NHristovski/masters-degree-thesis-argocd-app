@@ -16,6 +16,11 @@ spec:
         - name: b
           image: b/b:b
           env:
+            - name: AA
+              valueFrom:
+                secretKeyRef:
+                  name: A
+                  key: A
             - name: BB
               value: "N"
           volumeMounts:
