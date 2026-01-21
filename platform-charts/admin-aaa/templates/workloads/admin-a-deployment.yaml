@@ -16,6 +16,11 @@ spec:
         - name: a
           image: docker.io/a:a
           env:
+            - name: AAA
+              valueFrom:
+                secretKeyRef:
+                  name: A
+                  key: A
             - name: BBB
               value: "BBB"
           volumeMounts:
