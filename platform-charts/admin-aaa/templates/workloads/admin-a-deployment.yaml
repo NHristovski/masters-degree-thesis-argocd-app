@@ -24,11 +24,6 @@ spec:
             - name: BBB
               value: "BBB"
           volumeMounts:
-            - name: data2
-              mountPath: /data
           ports:
             - containerPort: 80
       volumes:
-        - name: data2
-          persistentVolumeClaim:
-            claimName: data2
