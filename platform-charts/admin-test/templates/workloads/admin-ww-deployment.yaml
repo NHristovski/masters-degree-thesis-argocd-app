@@ -16,6 +16,12 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           env:
+            - name: ENV
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: password
             - name: AA
               value: "A"
+
 
