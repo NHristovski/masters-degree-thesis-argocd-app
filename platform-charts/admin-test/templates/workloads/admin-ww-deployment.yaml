@@ -16,8 +16,6 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           env:
-            - name: PPP
-              value: "PPP"
             - name: AAAAA
               valueFrom:
                 secretKeyRef:
@@ -30,6 +28,7 @@ spec:
                   key: password
             - name: AA
               value: "A"
+
 
 
 
