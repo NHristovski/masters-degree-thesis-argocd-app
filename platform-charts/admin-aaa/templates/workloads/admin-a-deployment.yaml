@@ -15,6 +15,9 @@ spec:
       containers:
         - name: a
           image: docker.io/a:a
+          env:
+            - name: BBB
+              value: "BBB"
           volumeMounts:
             - name: data2
               mountPath: /data
