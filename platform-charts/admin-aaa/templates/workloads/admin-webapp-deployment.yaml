@@ -15,6 +15,9 @@ spec:
       containers:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
+          volumeMounts:
+            - name: data
+              mountPath: /data
           ports:
             - containerPort: 80
           env:
@@ -23,3 +26,7 @@ spec:
                 secretKeyRef:
                   name: A
                   key: A
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
