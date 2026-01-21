@@ -20,5 +20,3 @@ spec:
           env:
             - name: C
               value: "C"
-            - name: B
-              value: "bbbb"
