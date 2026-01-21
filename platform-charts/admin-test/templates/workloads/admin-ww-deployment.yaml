@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ww
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ww
+  template:
+    metadata:
+      labels:
+        app: ww
+    spec:
+      containers:
+        - name: nginx
+          image: docker.io/nginx:1.27-alpine
+          ports:
+            - containerPort: 80
