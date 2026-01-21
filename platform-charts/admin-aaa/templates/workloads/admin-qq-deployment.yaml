@@ -17,3 +17,9 @@ spec:
           image: docker.io/qq:qq
           ports:
             - containerPort: 80
+          env:
+            - name: AAA
+              valueFrom:
+                secretKeyRef:
+                  name: A
+                  key: A
