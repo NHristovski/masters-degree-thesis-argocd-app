@@ -17,6 +17,9 @@ spec:
           image: docker.io/b:b
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: second
+              mountPath: /data
           env:
             - name: B
               value: "B"
@@ -25,3 +28,7 @@ spec:
                 secretKeyRef:
                   name: A
                   key: A
+      volumes:
+        - name: second
+          persistentVolumeClaim:
+            claimName: second
