@@ -20,12 +20,5 @@ spec:
               value: "value2"
             - name: TEST
               value: "value"
-          volumeMounts:
-            - name: dv
-              mountPath: /data
           ports:
             - containerPort: 80
-      volumes:
-        - name: dv
-          persistentVolumeClaim:
-            claimName: dv
