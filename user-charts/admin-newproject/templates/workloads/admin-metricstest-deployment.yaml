@@ -16,4 +16,5 @@ spec:
         - name: nikolahristovski-springboot-scalability
           image: docker.io/nikolahristovski/springboot-scalability:1.0.0
           ports:
-            - containerPort: 8082
+            - containerPort: 8080
+

@@ -16,4 +16,4 @@ spec:
             value: /
       backendRefs:
         - name: metricstest
-          port: 8082
+          port: 8080
