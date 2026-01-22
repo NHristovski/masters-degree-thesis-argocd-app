@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: metrics
+  name: admin-metrics
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: metrics
+      app: admin-metrics
   template:
     metadata:
       labels:
-        app: metrics
+        app: admin-metrics
     spec:
       containers:
-        - name: prom-prometheus-example-app
-          image: docker.io/prom/prometheus-example-app:latest
+        - name: brancz-prometheus-example-app
+          image: quay.io/brancz/prometheus-example-app:0.5.0
           ports:
             - containerPort: 8080
