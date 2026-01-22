@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metricstest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metricstest
+  template:
+    metadata:
+      labels:
+        app: metricstest
+    spec:
+      containers:
+        - name: nikolahristovski-springboot-scalability
+          image: docker.io/nikolahristovski/springboot-scalability:1.0.0
+          ports:
+            - containerPort: 8082

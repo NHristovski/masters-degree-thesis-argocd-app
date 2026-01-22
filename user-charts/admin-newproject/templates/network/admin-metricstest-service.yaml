@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: metricstest
+spec:
+  type: ClusterIP
+  selector:
+    app: metricstest
+  ports:
+    - name: http
+      port: 8082
+      targetPort: 8082
+      protocol: TCP
