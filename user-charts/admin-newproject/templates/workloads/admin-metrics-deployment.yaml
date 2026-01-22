@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: metrics
+  name: admin-metrics
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: metrics
+      app: admin-metrics
   template:
     metadata:
       labels:
-        app: metrics
+        app: admin-metrics
     spec:
       containers:
-        - name: nikolahristovski-springboot-scalability
+        - name: springboot-scalability
           image: docker.io/nikolahristovski/springboot-scalability:1.0.0
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
