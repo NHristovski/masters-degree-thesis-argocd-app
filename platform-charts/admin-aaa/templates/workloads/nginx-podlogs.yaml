@@ -6,10 +6,6 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  pipelineStages:
-    - cri: {}
-    - drop:
-        expression: "GET /health"
   relabelings:
     - sourceLabels: [__meta_kubernetes_pod_name]
       targetLabel: pod
