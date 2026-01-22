@@ -20,11 +20,6 @@ spec:
               value: "value2"
             - name: TEST
               value: "value"
-            - name: DB
-              valueFrom:
-                secretKeyRef:
-                  name: secret
-                  key: secret
           volumeMounts:
             - name: dv
               mountPath: /data
