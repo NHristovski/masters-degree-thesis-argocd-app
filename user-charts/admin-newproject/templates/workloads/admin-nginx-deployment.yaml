@@ -16,6 +16,8 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
           env:
+            - name: d
+              value: "d"
             - name: c
               value: "c"
             - name: b
