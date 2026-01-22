@@ -21,8 +21,6 @@ spec:
                 secretKeyRef:
                   name: secret
                   key: secret
-            - name: A
-              value: "A"
           volumeMounts:
             - name: dv
               mountPath: /data
