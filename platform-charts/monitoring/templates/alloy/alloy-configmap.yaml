@@ -155,7 +155,12 @@ data:
       }
     }
 
-    loki.source.podlogs "custompodlogs" {
+    loki.source.podlogs "default" {
+      forward_to = [loki.process.podlogs_cri.receiver]
+    }
+
+    loki.process "podlogs_cri" {
+      stage.cri {}
       forward_to = [loki.write.loki.receiver]
     }
 
