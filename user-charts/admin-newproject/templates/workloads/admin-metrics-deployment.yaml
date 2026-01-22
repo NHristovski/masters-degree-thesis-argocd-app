@@ -16,4 +16,4 @@ spec:
         - name: metrics-generator-tabajara
           image: docker.io/labbsr0x/metrics-generator-tabajara:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 30000
