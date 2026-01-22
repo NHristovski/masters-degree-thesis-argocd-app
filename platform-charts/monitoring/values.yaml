@@ -296,4 +296,28 @@ alloy:
   controller:
     type: "daemonset"
 
+prometheus-operator-crds:
+  crds:
+    # Enabled
+    servicemonitors:
+      enabled: true
 
+    # Disabled
+    podmonitors:
+      enabled: false
+    alertmanagerconfigs:
+      enabled: false
+    alertmanagers:
+      enabled: false
+    probes:
+      enabled: false
+    prometheusagents:
+      enabled: false
+    prometheuses:
+      enabled: false
+    prometheusrules:
+      enabled: false
+    scrapeconfigs:
+      enabled: false
+    thanosrulers:
+      enabled: false
