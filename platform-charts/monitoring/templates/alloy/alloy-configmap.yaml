@@ -161,6 +161,11 @@ data:
 
     loki.process "podlogs_cri" {
       stage.cri {}
+
+      stage.tenant {
+        value = "platform"
+      }
+
       forward_to = [loki.write.loki.receiver]
     }
 
