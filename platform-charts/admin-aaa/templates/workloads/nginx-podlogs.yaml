@@ -1,0 +1,19 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: PodLogs
+metadata:
+  name: nginx-logs
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  pipelineStages:
+    - cri: {}
+    - drop:
+        expression: "GET /health"
+  relabelings:
+    - sourceLabels: [__meta_kubernetes_pod_name]
+      targetLabel: pod
+    - sourceLabels: [__meta_kubernetes_pod_container_name]
+      targetLabel: container
+    - sourceLabels: [__meta_kubernetes_pod_node_name]
+      targetLabel: node
