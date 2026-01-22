@@ -15,5 +15,8 @@ spec:
       path: platform-charts/cilium-extensions
       targetRevision: main
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
