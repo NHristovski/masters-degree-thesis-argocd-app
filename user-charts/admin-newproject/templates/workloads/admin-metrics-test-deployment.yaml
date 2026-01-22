@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-test
+  template:
+    metadata:
+      labels:
+        app: metrics-test
+    spec:
+      containers:
+        - name: prom/prometheus-example-app
+          image: docker.io/prom/prometheus-example-app:latest
+          ports:
+            - containerPort: 8080

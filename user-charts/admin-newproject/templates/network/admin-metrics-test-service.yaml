@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics-test
+spec:
+  type: ClusterIP
+  selector:
+    app: metrics-test
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
