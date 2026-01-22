@@ -13,7 +13,7 @@ spec:
         app: admin-metrics
     spec:
       containers:
-        - name: kubespheredev-prometheus-example-app
-          image: docker.io/kubespheredev/prometheus-example-app:latest
+        - name: labbsr0x-metrics-generator-tabajara
+          image: docker.io/labbsr0x/metrics-generator-tabajara:latest
           ports:
             - containerPort: 8080
