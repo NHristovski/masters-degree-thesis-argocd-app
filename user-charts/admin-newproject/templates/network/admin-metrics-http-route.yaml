@@ -16,4 +16,4 @@ spec:
             value: /
       backendRefs:
         - name: metrics
-          port: 8081
+          port: 8080
