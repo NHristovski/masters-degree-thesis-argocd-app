@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: admin-test2
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: test2
+    server: https://kubernetes.default.svc
+  sources:
+    - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
+      path: user-charts/admin-test2
+      targetRevision: main
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
