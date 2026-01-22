@@ -13,7 +13,7 @@ spec:
         app: admin-metrics
     spec:
       containers:
-        - name: brancz-prometheus-example-app
-          image: quay.io/brancz/prometheus-example-app:0.5.0
+        - name: kubespheredev-prometheus-example-app
+          image: docker.io/kubespheredev/prometheus-example-app:latest
           ports:
             - containerPort: 8080
