@@ -1,0 +1,24 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: scalability-demo-http-scaler
+  annotations:
+    httpscaledobject.keda.sh/skip-scaledobject-creation: "false"
+spec:
+  hosts:
+    - scalabilitydemo.example.com
+  scaleTargetRef:
+    name: scalability-demo-deployment
+    kind: Deployment
+    apiVersion: apps/v1
+    service: scalability-demo-node-port
+    port: 30001
+  replicas:
+    min: 0
+    max: 2
+  scaledownPeriod: 5
+  scalingMetric:
+    requestRate:
+      granularity: 1s
+      targetValue: 100
+      window: 30s
