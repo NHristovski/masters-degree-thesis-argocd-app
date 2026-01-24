@@ -1,0 +1,15 @@
+apiVersion: monitoring.grafana.com/v1alpha2
+kind: PodLogs
+metadata:
+  name: scalability
+spec:
+  selector:
+    matchLabels:
+      app: scalability
+  relabelings:
+    - sourceLabels: [__meta_kubernetes_pod_name]
+      targetLabel: pod
+    - sourceLabels: [__meta_kubernetes_pod_container_name]
+      targetLabel: container
+    - sourceLabels: [__meta_kubernetes_pod_node_name]
+      targetLabel: node
