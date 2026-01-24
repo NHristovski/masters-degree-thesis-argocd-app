@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scalability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scalability
+  template:
+    metadata:
+      labels:
+        app: scalability
+    spec:
+      containers:
+        - name: nikolahristovski-springboot-scalability
+          image: docker.io/nikolahristovski/springboot-scalability:1.0.0
+          ports:
+            - containerPort: 8080
