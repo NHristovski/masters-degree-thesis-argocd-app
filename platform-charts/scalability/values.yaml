@@ -1,0 +1,5 @@
+keda-add-ons-http:
+  interceptor:
+    tcpConnectTimeout: 50s
+    responseHeaderTimeout: 50s
+    expectContinueTimeout: 50s
