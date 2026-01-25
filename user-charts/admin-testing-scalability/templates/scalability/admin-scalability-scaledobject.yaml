@@ -14,6 +14,6 @@ spec:
       metadata:
         serverAddress: http://monitoring-prometheus-server.monitoring.svc.cluster.local
         metricName: custom
-        threshold: "3"
+        threshold: "500"
         query: |
-          sum(rate(http_server_requests_active_seconds_sum{job="scalability"}[1m]))
+          sum(increase(http_server_requests_seconds_count{job="scalability"}[1m]))
