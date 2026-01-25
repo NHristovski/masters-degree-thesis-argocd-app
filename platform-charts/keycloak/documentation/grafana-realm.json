@@ -789,8 +789,8 @@
     {
       "id": "f8d8d8cd-bfce-47b1-a816-042d8a2653bb",
       "clientId": "grafana",
-      "name": "grafana",
-      "description": "grafana",
+      "name": "Platform",
+      "description": "Client for all platform apps",
       "rootUrl": "",
       "adminUrl": "",
       "baseUrl": "",
@@ -800,10 +800,14 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "pBpGi5EgpXORPOx3oKEynuVZ361psZwm",
       "redirectUris": [
-        "https://grafana.192.168.100.243.sslip.io/login/generic_oauth/*"
+        "https://grafana.192.168.100.243.sslip.io/login/generic_oauth/*",
+        "http://localhost:8080/*",
+        "https://catalog.192.168.100.243.sslip.io/*"
       ],
       "webOrigins": [
-        "https://grafana.192.168.100.243.sslip.io:443"
+        "https://grafana.192.168.100.243.sslip.io:443",
+        "http://localhost:8080",
+        "https://catalog.192.168.100.243.sslip.io:443"
       ],
       "notBefore": 0,
       "bearerOnly": false,
