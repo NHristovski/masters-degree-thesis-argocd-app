@@ -16,4 +16,4 @@ spec:
         metricName: custom
         threshold: "10"
         query: |
-          sum(rate(http_server_requests_active_seconds_sum{job="scalability"}[1m]))
+          sum(rate(httv_server_requests_active_seconds_sum{job="scalability"}[1m]))
