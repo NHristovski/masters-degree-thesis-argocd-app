@@ -4,11 +4,11 @@ metadata:
   name: nginx
 spec:
   parentRefs:
-    - name: b-cilium-gateway
+    - name: c-cilium-gateway
       sectionName: https
       namespace: cilium
   hostnames:
-    - "nginxtest.192.168.100.242.sslip.io"
+    - "wwwc.192.168.100.253.sslip.io"
   rules:
     - matches:
         - path:

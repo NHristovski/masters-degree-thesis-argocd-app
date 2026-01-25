@@ -1,6 +1,6 @@
 apiVersion: v2
-name: admin-b
-description: admin-b Helm chart for Kubernetes
+name: admin-c
+description: admin-c Helm chart for Kubernetes
 
 type: application
 
