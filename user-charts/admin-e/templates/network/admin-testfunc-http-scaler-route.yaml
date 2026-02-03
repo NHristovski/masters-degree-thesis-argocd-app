@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: testfunc
+spec:
+  parentRefs:
+    - name: e-cilium-gateway
+      sectionName: https
+      namespace: cilium
+  hostnames:
+    - "testfunc.192.168.100.250.sslip.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: keda-add-ons-http-interceptor-proxy.scalability.svc.cluster.local
+          port: 8080
