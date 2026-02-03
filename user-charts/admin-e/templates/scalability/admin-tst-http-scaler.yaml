@@ -1,0 +1,24 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: tst-http-scaler
+  annotations:
+    httpscaledobject.keda.sh/skip-scaledobject-creation: "false"
+spec:
+  hosts:
+    - tst.192.168.100.250.sslip.io
+  scaleTargetRef:
+    name: tst
+    kind: Deployment
+    apiVersion: apps/v1
+    service: tst
+    port: 80
+  replicas:
+    min: 0
+    max: 2
+  scaledownPeriod: 5
+  scalingMetric:
+    requestRate:
+      granularity: 1s
+      targetValue: 50
+      window: 30s
