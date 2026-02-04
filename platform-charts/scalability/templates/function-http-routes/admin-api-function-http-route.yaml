@@ -1,0 +1,33 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: api-function
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: e-cilium-gateway
+      namespace: cilium
+      sectionName: https
+  hostnames:
+    - "api-function.192.168.100.250.sslip.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: Retry
+          retry:
+            attempts: 3
+            perTryTimeout: 5s
+            retryOn:
+              - connect-failure
+              - reset
+              - gateway-error
+      backendRefs:
+        - group: ''
+          kind: Service
+          name: keda-add-ons-http-interceptor-proxy
+          port: 8080
+          weight: 1
