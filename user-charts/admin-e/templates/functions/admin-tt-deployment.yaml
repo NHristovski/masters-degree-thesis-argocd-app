@@ -13,7 +13,7 @@ spec:
         app: tt
     spec:
       containers:
-        - name: nginxx
-          image: docker.io/nginxx:1.27-alpine
+        - name: nginx
+          image: docker.io/nginx:1.27-alpine
           ports:
-            - containerPort: 80
+            - containerPort: 8080
