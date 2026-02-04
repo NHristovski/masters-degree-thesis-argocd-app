@@ -6,13 +6,13 @@ metadata:
     httpscaledobject.keda.sh/skip-scaledobject-creation: "false"
 spec:
   hosts:
-    - tt.192.168.100.250.sslip.io
+    - tta.192.168.100.250.sslip.io
   scaleTargetRef:
     name: tt
     kind: Deployment
     apiVersion: apps/v1
     service: tt
-    port: 8080
+    port: 80
   replicas:
     min: 0
     max: 2
