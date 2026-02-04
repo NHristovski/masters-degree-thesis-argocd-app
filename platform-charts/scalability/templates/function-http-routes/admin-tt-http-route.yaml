@@ -10,7 +10,7 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - "tt.192.168.100.250.sslip.io"
+    - "tta.192.168.100.250.sslip.io"
   rules:
     - matches:
         - path:
