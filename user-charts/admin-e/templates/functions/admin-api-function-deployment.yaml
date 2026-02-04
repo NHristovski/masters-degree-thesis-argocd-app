@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-function
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-function
+  template:
+    metadata:
+      labels:
+        app: api-function
+    spec:
+      containers:
+        - name: nginx
+          image: docker.io/nginx:1.27-alpine
+          ports:
+            - containerPort: 80
