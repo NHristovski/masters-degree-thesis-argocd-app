@@ -35,8 +35,8 @@ keycloak:
     enabled: false
   extraEnvVars:
     - name: KC_HOSTNAME_URL
-      value: https://keycloak.192.168.100.243.sslip.io
+      value: https://rotation-condos-chen-extension.trycloudflare.com/https://keycloak.192.168.100.243.sslip.io
     - name: KC_HOSTNAME_ADMIN_URL
-      value: https://keycloak.192.168.100.243.sslip.io
+      value: https://rotation-condos-chen-extension.trycloudflare.com/https://keycloak.192.168.100.243.sslip.io
     - name: KC_PROXY_HEADERS
       value: "forwarded"
