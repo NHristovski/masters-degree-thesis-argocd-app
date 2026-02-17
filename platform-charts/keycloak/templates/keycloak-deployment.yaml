@@ -28,7 +28,7 @@ spec:
             - name: KC_HTTP_ENABLED
               value: "true"
             - name: KC_HOSTNAME
-              value: keycloak.192.168.100.243.sslip.io
+              value: https://rotation-condos-chen-extension.trycloudflare.com/https://keycloak.192.168.100.243.sslip.io
             - name: KC_HOSTNAME_STRICT
               value: "false"
             - name: KC_PROXY_HEADERS
