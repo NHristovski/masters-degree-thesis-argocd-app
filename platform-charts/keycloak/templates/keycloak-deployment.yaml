@@ -29,8 +29,6 @@ spec:
               value: https://keycloak.caplatform.dpdns.org
             - name: KC_HOSTNAME_ADMIN_URL
               value: https://keycloak.caplatform.dpdns.org
-            - name: KC_PROXY_HEADERS
-              value: "forwarded"
             - name: KC_PROXY
               value: edge
             - name: KC_HOSTNAME_STRICT_HTTPS
