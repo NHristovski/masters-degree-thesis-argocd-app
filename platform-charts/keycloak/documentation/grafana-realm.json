@@ -1,6 +1,6 @@
 {
   "id": "87e35ed8-1e73-4bc0-8fbe-2408f6c25ff5",
-  "realm": "grafana",
+  "realm": "caplatform",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,

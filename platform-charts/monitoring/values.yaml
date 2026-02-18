@@ -97,16 +97,16 @@ grafana:
       enabled: true
       name: KEYCLOAK
       allow_sign_up: true
-      client_id: grafana
+      client_id: caplatform
       client_secret: ${OAUTH_CLIENT_SECRET}
       scopes: openid email profile offline_access roles
       email_attribute_path: email
       login_attribute_path: username
       name_attribute_path: full_name
-      auth_url: https://keycloak.192.168.100.243.sslip.io/realms/grafana/protocol/openid-connect/auth
-      token_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/token
-      api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/userinfo
-      signout_redirect_url: https://keycloak.192.168.100.243.sslip.io/realms/grafana/protocol/openid-connect/logout
+      auth_url: https://keycloak.caplatform.dpdns.org/realms/caplatform/protocol/openid-connect/auth
+      token_url: http://keycloak.keycloak.svc.cluster.local:80/realms/caplatform/protocol/openid-connect/token
+      api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/caplatform/protocol/openid-connect/userinfo
+      signout_redirect_url: https://keycloak.caplatform.dpdns.org/realms/caplatform/protocol/openid-connect/logout
       role_attribute_path: contains(realm_access.roles[*], 'GrafanaSuperadmin') && 'GrafanaAdmin' || contains(realm_access.roles[*], 'GrafanaAdmin') && 'Admin' || contains(realm_access.roles[*], 'GrafanaEditor') && 'Editor' || 'Viewer'
       role_attribute_strict: true
       allow_assign_grafana_admin: true
