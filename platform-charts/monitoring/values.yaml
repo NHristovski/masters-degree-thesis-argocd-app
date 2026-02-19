@@ -43,7 +43,7 @@ grafana:
     GF_SECURITY_ALLOW_EMBEDDING: true
     GF_CORS_ENABLED: true
     GF_CORS_ALLOW_CREDENTIALS: true
-    GF_CORS_ALLOWED_ORIGINS: "https://grafana.192.168.100.243.sslip.io/,http://grafana.monitoring.svc.cluster.local,https://grafana.monitoring.svc.cluster.local"
+    GF_CORS_ALLOWED_ORIGINS: "https://grafana.192.168.100.243.sslip.io/,http://grafana.monitoring.svc.cluster.local,https://grafana.monitoring.svc.cluster.local,https://grafana.caplatform.dpdns.org/"
     GF_CORS_ALLOWED_METHODS: "GET,POST,PUT,DELETE,OPTIONS"
     GF_CORS_ALLOWED_HEADERS: "accept,authorization,content-type,origin"
 
@@ -91,8 +91,8 @@ grafana:
       password: ${POSTGRES_PASSWORD}
       ssl_mode: disable
     server:
-      domain: https://grafana.192.168.100.243.sslip.io/
-      root_url: https://grafana.192.168.100.243.sslip.io/
+      domain: https://grafana.caplatform.dpdns.org/
+      root_url: https://grafana.caplatform.dpdns.org/
     auth.generic_oauth:
       enabled: true
       name: KEYCLOAK
