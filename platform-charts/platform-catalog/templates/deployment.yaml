@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-catalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform-catalog
+  template:
+    metadata:
+      labels:
+        app: platform-catalog
+    spec:
+      containers:
+        - image: docker.io/nikolahristovski/platformcatalog:1.0.0
+          name: platform-catalog
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: catalog-secret
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
