@@ -18,5 +18,10 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: SECRET_TEST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-from-public-url
+                  key: PASS
             - name: DB_TEST
               value: "OK"
