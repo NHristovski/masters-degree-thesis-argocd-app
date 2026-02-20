@@ -13,7 +13,7 @@ spec:
         app: platform-catalog
     spec:
       containers:
-        - image: docker.io/nikolahristovski/platformcatalog:1.0.0
+        - image: docker.io/nikolahristovski/platformcatalog:1.0.1
           name: platform-catalog
           ports:
             - containerPort: 8080
