@@ -19,6 +19,6 @@ spec:
       backendRefs:
         - group: ''
           kind: Service
-          name: keda-add-ons-http-interceptor-proxy
-          port: 8080
+          name: retry-proxy
+          port: 80
           weight: 1
