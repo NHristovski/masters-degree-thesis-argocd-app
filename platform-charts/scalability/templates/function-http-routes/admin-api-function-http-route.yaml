@@ -22,7 +22,3 @@ spec:
           name: keda-add-ons-http-interceptor-proxy
           port: 8080
           weight: 1
-      retry:
-        codes: [ 500, 502, 503, 504 ]
-        attempts: 3
-        backoff: 1500ms
