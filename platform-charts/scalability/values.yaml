@@ -1,5 +1,12 @@
 keda-add-ons-http:
   interceptor:
-    tcpConnectTimeout: 50s
-    responseHeaderTimeout: 50s
-    expectContinueTimeout: 50s
+    replicas:
+      min: 2
+      max: 3
+      waitTimeout: 120s
+    tcpConnectTimeout: 120s
+    keepAlive: 120s
+    idleConnTimeout: 120s
+    tlsHandshakeTimeout: 120s
+    responseHeaderTimeout: 120s
+    expectContinueTimeout: 120s
