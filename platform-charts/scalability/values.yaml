@@ -3,10 +3,10 @@ keda-add-ons-http:
     replicas:
       min: 2
       max: 3
-      waitTimeout: 15s
-    tcpConnectTimeout: 15s
-    keepAlive: 15s
-    idleConnTimeout: 15s
-    tlsHandshakeTimeout: 15s
-    responseHeaderTimeout: 15s
-    expectContinueTimeout: 15s
+      waitTimeout: 10s
+    tcpConnectTimeout: 10s
+    keepAlive: 10s
+    idleConnTimeout: 10s
+    tlsHandshakeTimeout: 10s
+    responseHeaderTimeout: 10s
+    expectContinueTimeout: 10s
