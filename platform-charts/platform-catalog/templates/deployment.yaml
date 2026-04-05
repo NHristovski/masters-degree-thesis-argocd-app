@@ -17,6 +17,9 @@ spec:
           name: platform-catalog
           ports:
             - containerPort: 8080
+          env:
+            - name: APP_VERSION
+              value: "{{.Values.image.version}}"
           envFrom:
             - secretRef:
                 name: catalog-secret
