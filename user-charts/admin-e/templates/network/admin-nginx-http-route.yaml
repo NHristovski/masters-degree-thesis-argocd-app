@@ -8,7 +8,7 @@ spec:
       sectionName: https
       namespace: cilium
   hostnames:
-    - "eee.192.168.100.250.sslip.io"
+    - "eeee.192.168.100.250.sslip.io"
   rules:
     - matches:
         - path:
