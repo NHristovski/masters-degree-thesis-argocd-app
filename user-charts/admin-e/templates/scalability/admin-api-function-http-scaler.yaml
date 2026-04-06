@@ -6,7 +6,7 @@ metadata:
     httpscaledobject.keda.sh/skip-scaledobject-creation: "false"
 spec:
   hosts:
-    - api-function.192.168.100.250.sslip.io
+    - api-function2.192.168.100.250.sslip.io
   scaleTargetRef:
     name: api-function
     kind: Deployment
