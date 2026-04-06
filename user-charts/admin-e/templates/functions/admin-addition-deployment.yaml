@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addition
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: addition
+  template:
+    metadata:
+      labels:
+        app: addition
+    spec:
+      containers:
+        - name: nikolahristovski-springboot-scalability
+          image: docker.io/nikolahristovski/springboot-scalability:docker.io/nikolahristovski/go-addition-function:1.0.0
+          ports:
+            - containerPort: 8080
