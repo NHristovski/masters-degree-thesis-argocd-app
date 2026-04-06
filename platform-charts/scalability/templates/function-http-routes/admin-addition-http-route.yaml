@@ -18,18 +18,9 @@ spec:
         - path:
             type: PathPrefix
             value: /
-      filters:
-      - type: Retry
-        retry:
-          attempts: 3
-          perTryTimeout: 5s
-          retryOn:
-          - connect-failure
-          - reset
-          - gateway-error
       backendRefs:
         - group: ''
           kind: Service
-          name: keda-add-ons-http-interceptor-proxy
-          port: 8080
+          name: retry-proxy
+          port: 80
           weight: 1
