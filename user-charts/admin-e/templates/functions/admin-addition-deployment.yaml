@@ -13,7 +13,7 @@ spec:
         app: addition
     spec:
       containers:
-        - name: nikolahristovski-springboot-scalability
-          image: docker.io/nikolahristovski/springboot-scalability:docker.io/nikolahristovski/go-addition-function:1.0.0
+        - name: docker.io-nikolahristovski-go-addition-function
+          image: docker.io/docker.io/nikolahristovski/go-addition-function:1.0.0
           ports:
             - containerPort: 8080
