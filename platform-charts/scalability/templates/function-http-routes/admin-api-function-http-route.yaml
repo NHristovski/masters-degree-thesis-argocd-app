@@ -12,7 +12,7 @@ spec:
       namespace: cilium
       sectionName: https
   hostnames:
-    - "api-function2.192.168.100.250.sslip.io"
+    - "api-function23.192.168.100.250.sslip.io"
   rules:
     - matches:
         - path:
