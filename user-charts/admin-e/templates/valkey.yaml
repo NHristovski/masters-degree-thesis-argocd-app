@@ -20,8 +20,8 @@ spec:
   clusterDomain: cluster.local
   clusterPreferredEndpointType: ip
 
-  prometheus: true
-  serviceMonitor: true
+  prometheus: false
+  serviceMonitor: false
 
   tls: false
 
