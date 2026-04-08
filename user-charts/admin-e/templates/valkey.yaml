@@ -20,14 +20,11 @@ spec:
   clusterDomain: cluster.local
   clusterPreferredEndpointType: ip
 
-  # --- Prometheus ---
   prometheus: true
   serviceMonitor: true
 
-  # --- TLS ---
   tls: false
 
-  # --- Resources ---
   resources:
     requests:
       cpu: 100m
@@ -35,24 +32,14 @@ spec:
     limits:
       cpu: 500m
       memory: 512Mi
+  storage:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: ceph-block-storage
+      resources:
+        requests:
+          storage: 1Gi
 
-  # --- Storage ---
-{{/*  storage:*/}}
-{{/*    spec:*/}}
-{{/*      accessModes:*/}}
-{{/*        - ReadWriteOnce*/}}
-{{/*      storageClassName: ceph-block-storage*/}}
-{{/*      resources:*/}}
-{{/*        requests:*/}}
-{{/*          storage: 5Gi*/}}
-
-  # --- Scheduling ---
-  volumePermissions: false
-  nodeSelector: {}
-  tolerations: []
-
-  # --- External Access ---
-  externalAccess:
-    enabled: false
 
 
