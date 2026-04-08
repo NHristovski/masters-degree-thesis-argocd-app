@@ -1,0 +1,37 @@
+apiVersion: hyperspike.io/v1
+kind: Valkey
+metadata:
+  name: m
+spec:
+  # --- Auth ---
+  anonymousAuth: false
+  servicePassword:
+    name: m
+    key: password
+    optional: false
+
+  # --- Images ---
+  image: ghcr.io/hyperspike/valkey:8.1.4
+  exporterImage: ghcr.io/hyperspike/valkey-sidecar:v0.0.51
+
+  # --- Topology ---
+  nodes: 1
+  replicas: 0
+  clusterDomain: cluster.local
+  clusterPreferredEndpointType: ip
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  storage:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: ceph-block-storage
+      resources:
+        requests:
+          storage: 1Gi
