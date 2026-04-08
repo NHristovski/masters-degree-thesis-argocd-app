@@ -9,7 +9,7 @@ spec:
   source:
     path: .
     repoURL: oci://ghcr.io/hyperspike/valkey-operator
-    targetRevision: "0.0.61"
+    targetRevision: "v0.0.61"
     helm:
       valuesObject:
         config:
