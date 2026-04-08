@@ -9,7 +9,7 @@ spec:
   source:
     path: .
     repoURL: oci://ghcr.io/hyperspike/valkey-operator
-    targetRevision: "0.0.61"
+    targetRevision: "v0.0.55-chart"
     helm:
       valuesObject:
         config:
@@ -28,7 +28,7 @@ spec:
                   - ALL
             image:
               repository: ghcr.io/hyperspike/valkey-operator
-              tag: v0.0.61
+              tag: v0.0.55
             resources:
               limits:
                 cpu: 500m
