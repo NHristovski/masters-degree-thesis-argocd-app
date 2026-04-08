@@ -20,11 +20,6 @@ spec:
   clusterDomain: cluster.local
   clusterPreferredEndpointType: ip
 
-  prometheus: false
-  serviceMonitor: false
-
-  tls: false
-
   resources:
     requests:
       cpu: 100m
