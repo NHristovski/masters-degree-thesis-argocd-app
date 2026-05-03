@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: object-storage-app-data
+data:
+  bucketName: app-data
+  endpoint: http://192.168.100.226:80
+  accessKeyId: acckey99999
+  credentialsSecretName: bucket-app-data-credentials
