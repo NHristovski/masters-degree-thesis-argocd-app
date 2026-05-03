@@ -1,0 +1,16 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: User
+metadata:
+  name: appuser
+spec:
+  mariaDbRef:
+    namespace: mariadb
+    name: mariadb
+    waitForIt: false
+  passwordSecretKeyRef:
+    name: mariadb-appdb-password
+    key: DATABASE_PASSWORD
+  maxUserConnections: 200
+  host: "%"
+  requeueInterval: 30s
+  retryInterval: 5s
