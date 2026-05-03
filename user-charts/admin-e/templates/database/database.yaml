@@ -1,0 +1,11 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Database
+metadata:
+  name: test
+spec:
+  mariaDbRef:
+    namespace: mariadb
+    name: mariadb
+    waitForIt: false
+  requeueInterval: 30s
+  retryInterval: 5s
