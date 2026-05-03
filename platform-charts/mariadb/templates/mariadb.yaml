@@ -6,39 +6,7 @@ spec:
   image: mariadb:11.8.6
   replicas: 1
   galera:
-    enabled: true
-    primary:
-      podIndex: 0
-      autoFailover: true
-    sst: mariabackup
-    availableWhenDonor: false
-    recovery:
-      enabled: false
-      minClusterSize: 1
-    config:
-      reuseStorageVolume: false
-    agent:
-      image: mariadb:11.8.6
-      imagePullPolicy: IfNotPresent
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 998
-    initContainer:
-      image: mariadb:11.8.6
-      imagePullPolicy: IfNotPresent
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 998
+    enabled: false
 
   storage:
     resizeInUseVolumes: true
