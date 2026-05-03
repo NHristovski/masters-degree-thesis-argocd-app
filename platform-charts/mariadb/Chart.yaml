@@ -1,0 +1,10 @@
+apiVersion: v2
+name: mariadb
+description: A Helm chart for mariadb-galera cluster
+type: application
+version: 1.0.0
+appVersion: "0.38.1"
+dependencies:
+  - name: mariadb-operator
+    version: 25.10.4
+    repository: https://helm.mariadb.com/mariadb-operator

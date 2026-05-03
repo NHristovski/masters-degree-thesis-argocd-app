@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-conf
+data:
+  my.cnf: |
+    [mariadb]
+    bind-address = *
+    default_storage_engine = InnoDB
+    sort_buffer_size = 16M
+    max_allowed_packet = 256M
+    binlog_format = row
+    innodb_autoinc_lock_mode = 2
+    net_buffer_length = 1048576
+    host-cache-size = 0
+    skip-name-resolve
+
+    [mysqld]
+    basedir = /usr
+    expire_logs_days = 10
+    character-set-server = utf8mb4
+    collation-server = utf8mb4_general_ci

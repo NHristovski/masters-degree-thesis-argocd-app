@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mariadb
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: mariadb
+    server: https://kubernetes.default.svc
+  sources:
+    - repoURL: https://github.com/NHristovski/masters-degree-thesis-argocd-app.git
+      path: platform-charts/mariadb
+      targetRevision: main
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

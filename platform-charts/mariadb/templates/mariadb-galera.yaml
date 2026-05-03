@@ -1,0 +1,108 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: mariadb-galera
+spec:
+  image: mariadb:11.8.6
+  replicas: 1
+  galera:
+    enabled: true
+    primary:
+      podIndex: 0
+      autoFailover: true
+    sst: mariabackup
+    availableWhenDonor: false
+    recovery:
+      enabled: false
+      minClusterSize: 1
+    config:
+      reuseStorageVolume: false
+    agent:
+      image: mariadb:11.8.6
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 998
+    initContainer:
+      image: mariadb:11.8.6
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 998
+
+  storage:
+    resizeInUseVolumes: true
+    waitForVolumeResize: true
+    volumeClaimTemplate:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: ceph-block-storage
+
+  rootPasswordSecretKeyRef:
+    name: mariadb
+    key: root
+    generate: false
+  rootEmptyPassword: false
+
+  myCnfConfigMapKeyRef:
+    name: mariadb-conf
+    key: my.cnf
+
+  readinessProbe:
+    failureThreshold: 10
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 10
+  livenessProbe:
+    failureThreshold: 10
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 10
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 1Gi
+    limits:
+      memory: 3Gi
+
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+    runAsUser: 1000
+    fsGroup: 1000
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+
+  volumeMounts:
+    - name: tmp
+      mountPath: /tmp
+    - name: run
+      mountPath: /run/mysqld
+  volumes:
+    - name: tmp
+      emptyDir: { }
+    - name: run
+      emptyDir: { }
