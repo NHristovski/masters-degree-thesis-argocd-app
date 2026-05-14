@@ -2,6 +2,9 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: api-function
+  annotations:
+    caplatform.dpdns.org/public: "true"
+    caplatform.dpdns.org/contextpath: "e-nginx=>api-function23.192.168.100.250.sslip.io"
 spec:
   parentRefs:
     - group: gateway.networking.k8s.io
