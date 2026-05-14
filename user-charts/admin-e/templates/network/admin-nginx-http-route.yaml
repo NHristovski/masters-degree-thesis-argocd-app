@@ -4,6 +4,7 @@ metadata:
   name: nginx
   annotations:
     caplatform.dpdns.org/public: "true"
+    caplatform.dpdns.org/contextpath: "e-aa=>wq.192.168.100.250.sslip.io"
 spec:
   parentRefs:
     - name: e-cilium-gateway
