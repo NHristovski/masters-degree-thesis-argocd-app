@@ -18,11 +18,6 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mariadb-appdb-password
-                  key: DATABASE_PASSWORD
             - name: VALKEY_PASSWORD
               valueFrom:
                 secretKeyRef:
