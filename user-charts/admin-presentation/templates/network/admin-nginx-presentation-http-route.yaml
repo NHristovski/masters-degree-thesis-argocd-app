@@ -2,9 +2,6 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: nginx-presentation
-  annotations:
-    caplatform.dpdns.org/public: "true"
-    caplatform.dpdns.org/contextpath: "presentation-nginx=>presentation-nginx.192.168.100.245.sslip.io"
 spec:
   parentRefs:
     - name: presentation-cilium-gateway
