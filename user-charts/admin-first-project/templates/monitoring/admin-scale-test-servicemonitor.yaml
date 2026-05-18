@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: scale-test
+spec:
+  selector:
+    matchLabels:
+      app: scale-test
+  endpoints:
+    - targetPort: 8080
+      path: /actuator/prometheus
+      interval: 30s
