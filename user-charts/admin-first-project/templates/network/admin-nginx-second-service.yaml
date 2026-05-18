@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-second
+  labels:
+    app: nginx-second
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx-second
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
