@@ -18,6 +18,11 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-appdb-password
+                  key: DATABASE_PASSWORD
             - name: DATABASE_URL
               value: "mariadb.mariadb.svc.cluster.local:3306/appdb"
             - name: API_KEY
