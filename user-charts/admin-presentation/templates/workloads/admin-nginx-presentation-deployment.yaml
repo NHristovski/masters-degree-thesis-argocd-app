@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-presentation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-presentation
+  template:
+    metadata:
+      labels:
+        app: nginx-presentation
+    spec:
+      containers:
+        - name: nginx
+          image: docker.io/nginx:1.27-alpine
+          ports:
+            - containerPort: 80
