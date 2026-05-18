@@ -17,3 +17,6 @@ spec:
           image: docker.io/nginx:1.27-alpine
           ports:
             - containerPort: 80
+          env:
+            - name: DATABASE_NAME
+              value: "mydatabase"
