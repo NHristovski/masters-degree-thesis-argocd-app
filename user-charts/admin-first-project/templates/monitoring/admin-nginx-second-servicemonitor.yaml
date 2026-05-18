@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nginx-second
+spec:
+  selector:
+    matchLabels:
+      app: nginx-second
+  endpoints:
+    - targetPort: 80
+      path: /metrics
+      interval: 30s
