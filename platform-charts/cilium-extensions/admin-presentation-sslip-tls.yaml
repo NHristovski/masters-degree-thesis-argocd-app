@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: presentation-sslip-tls
+  namespace: cilium
+spec:
+  secretName: presentation-sslip-tls
+  dnsNames:
+    - "*.192.168.100.245.sslip.io"
+    - "192.168.100.245.sslip.io"
+  issuerRef:
+    name: vault-cluster-issuer
+    kind: ClusterIssuer
