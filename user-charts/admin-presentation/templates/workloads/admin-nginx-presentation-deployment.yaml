@@ -15,6 +15,9 @@ spec:
       containers:
         - name: nginx
           image: docker.io/nginx:1.27-alpine
+          volumeMounts:
+            - name: data-volume
+              mountPath: /var/www/logs
           ports:
             - containerPort: 80
           env:
@@ -32,3 +35,7 @@ spec:
                   key: API_KEY
             - name: DATABASE_NAME
               value: "mydatabase"
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: data-volume
