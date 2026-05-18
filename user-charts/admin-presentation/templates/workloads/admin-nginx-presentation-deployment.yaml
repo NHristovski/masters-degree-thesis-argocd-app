@@ -18,5 +18,10 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: API_KEY
+                  key: API_KEY
             - name: DATABASE_NAME
               value: "mydatabase"
