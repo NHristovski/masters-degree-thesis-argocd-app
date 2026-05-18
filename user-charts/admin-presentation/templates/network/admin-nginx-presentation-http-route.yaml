@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nginx-presentation
+spec:
+  parentRefs:
+    - name: presentation-cilium-gateway
+      sectionName: https
+      namespace: cilium
+  hostnames:
+    - "presentation-nginx.192.168.100.245.sslip.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: nginx-presentation
+          port: 80
